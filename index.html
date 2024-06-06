@@ -1,0 +1,1449 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="Documentation"
+            content="Documentation for Zpayasia"
+        >
+    <title>API Reference</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-9c19b03a.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-024da600.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-1e815a84.png" class="logo" alt="" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#request-headers" class="toc-h2 toc-link" data-title="Request Headers">Request Headers</a>
+                  </li>
+                  <li>
+                    <a href="#build-signature" class="toc-h2 toc-link" data-title="Build Signature">Build Signature</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#transaction-methods" class="toc-h1 toc-link" data-title="Transaction Methods">Transaction Methods</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#fetch-available-transaction-methods" class="toc-h2 toc-link" data-title="Fetch Available Transaction Methods">Fetch Available Transaction Methods</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#payments" class="toc-h1 toc-link" data-title="Payments">Payments</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-payments" class="toc-h2 toc-link" data-title="Create Payments">Create Payments</a>
+                  </li>
+                  <li>
+                    <a href="#get-payment-detail" class="toc-h2 toc-link" data-title="Get Payment Detail">Get Payment Detail</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#payout" class="toc-h1 toc-link" data-title="Payout">Payout</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-payout" class="toc-h2 toc-link" data-title="Create Payout">Create Payout</a>
+                  </li>
+                  <li>
+                    <a href="#get-payout-detail" class="toc-h2 toc-link" data-title="Get Payout Detail">Get Payout Detail</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <hr>
+
+<h1 id='introduction'>Introduction</h1>
+
+<p>Welcome to Xenithpay API Documentation.
+Make sure you have get your account approved and ready for development and testing, and finally to go-live.
+Contact our support for any inquiries at help@xenithpay.com</p>
+
+<h1 id='authentication'>Authentication</h1>
+
+<blockquote>
+<p>Example of Secret and Access Key</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight sh tab-shell"><code>Secret key: sk-760a8a0c8826b2e9dd8fe3ed0c66976f0c3d4a0443056674b7c132a25ddbbaf6eed1a410e02609a0a9791d7683c5de83860574bf6a92ddf8ea5a14360a96ac3c
+Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
+</code></pre></div>
+
+<p>To authenticate your request you will need to prepare a few items before actually making the request to our API.</p>
+
+<ul>
+<li>Create your Access Key and Secret Key from our Dashboard. See the example of how the Access Key and Secret Key looks like.</li>
+</ul>
+
+<h2 id='request-headers'>Request Headers</h2>
+
+<table><thead>
+<tr>
+<th>Header Name</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Zenith-Api-Key</td>
+<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Timestamp</td>
+<td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Signature</td>
+<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
+</tr>
+</tbody></table>
+
+<h2 id='build-signature'>Build Signature</h2>
+
+<p>Also can see the example on the right-side to see how to make it on Javascript</p>
+
+<blockquote>
+<p>How to Generate Signature on Postman Pre-Script</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">secretKey</span> <span class="o">=</span>
+  <span class="dl">"</span><span class="s2">sk-760a8a0c8826b2e9dd8fe3ed0c66976f0c3d4a0443056674b7c132a25ddbbaf6eed1a410e02609a0a9791d7683c5de83860574bf6a92ddf8ea5a14360a96ac3c</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">// Get the current timestamp in RFC3339 format</span>
+<span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">();</span>
+<span class="c1">// Get the request method and URI</span>
+<span class="kd">var</span> <span class="nx">method</span> <span class="o">=</span> <span class="nx">pm</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">method</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="nx">pm</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">getPathWithQuery</span><span class="p">();</span>
+<span class="c1">// Concatenate the method, URI, and timestamp</span>
+<span class="kd">var</span> <span class="nx">signaturePayload</span> <span class="o">=</span> <span class="nx">method</span> <span class="o">+</span> <span class="dl">"</span><span class="se">\n</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">uri</span> <span class="o">+</span> <span class="dl">"</span><span class="se">\n</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">timestamp</span><span class="p">;</span>
+<span class="c1">// Create a HMAC SHA256 hash of the signature payload</span>
+<span class="kd">var</span> <span class="nx">hash</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">HmacSHA256</span><span class="p">(</span><span class="nx">signaturePayload</span><span class="p">,</span> <span class="nx">secretKey</span><span class="p">);</span>
+<span class="c1">// Encode the hash in base64</span>
+<span class="kd">var</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Base64</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">hash</span><span class="p">);</span>
+<span class="c1">// Set the timestamp and signature as environment variables</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">request_timestamp</span><span class="dl">"</span><span class="p">,</span> <span class="nx">timestamp</span><span class="p">);</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">request_signature</span><span class="dl">"</span><span class="p">,</span> <span class="nx">signature</span><span class="p">);</span>
+
+<span class="c1">// use the environment on your request.</span>
+</code></pre></div><h3 id='format'>Format</h3>
+<table><thead>
+<tr>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>HTTP METHOD + &quot;\n&quot; + URI + &quot;\n&quot; + TIMESTAMP</code></td>
+<td>POST<br>/v1/payments<br>2024-05-10T16:42:22.802Z</td>
+</tr>
+</tbody></table>
+<h3 id='sign-the-signature'>Sign the Signature</h3>
+<p><code>signaturePayload= &quot;POST\n/v1/payments\n2024-05-10T16:42:22.802Z&quot;</code> <br>
+<code>var hash = CryptoJS.HmacSHA256(signaturePayload, &lt;Secret Key&gt;)</code><br>
+<code>signature = CryptoJS.enc.Base64.stringify(hash);</code><br></p>
+
+<p>Now finally, add the signature to every request header when calling the API for Zenith <br></p>
+
+<p><code>Zenith-Request-Signature = signature</code> <br></p>
+
+<h1 id='transaction-methods'>Transaction Methods</h1><h2 id='fetch-available-transaction-methods'>Fetch Available Transaction Methods</h2>
+<p>This endpoint is used to see what is the available transaction method (both for Payment and Payout) for you.
+This is personally picked based on what you have agreed during the onboarding. If you need more access to more channels and currencies, please reach our support team and align on new agreement</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://&lt;xenith-api-host&gt;/v1/transaction-methods</code></p>
+<h3 id='request-headers'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header Name</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Zenith-Api-Key</td>
+<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Timestamp</td>
+<td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Signature</td>
+<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request Example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/transaction-methods'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-24T05:24:32.125Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: O++du6UvdJj4fN+J2rv5X4Tgqknc5HHZ++9ugYPG7us='</span>
+</code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>N</td>
+<td>string</td>
+<td>The currency that you want to check</td>
+</tr>
+<tr>
+<td>transactionCategory</td>
+<td>N</td>
+<td>string</td>
+<td>the transaction category, enum [PAYMENT, PAYOUT]</td>
+</tr>
+<tr>
+<td>transactionMethod</td>
+<td>N</td>
+<td>string</td>
+<td>the transaction method, enum [VIRTUAL_ACCOUNT, BANK_TRANSFER, EWALLET_TRANSFER, QR_CODE]</td>
+</tr>
+</tbody></table>
+<h3 id='http-response'>HTTP Response</h3>
+<blockquote>
+<p>Response Example Code</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"transactionCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xenith-host.com/logo/permata.png"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"transactionCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYOUT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xenith-host.com/logo/permata.png"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"transactionCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QR_CODE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QRIS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xenith-host.com/logo/qris.png"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"transactionCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactionChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BCA"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xenith-host.com/logo/bca.png"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transactionCategory</td>
+<td>string</td>
+<td>the transaction category, enum [PAYMENT, PAYOUT]</td>
+</tr>
+<tr>
+<td>transactionMethod</td>
+<td>string</td>
+<td>the transaction method, enum [VIRTUAL_ACCOUNT, BANK_TRANSFER, EWALLET_TRANSFER, QR_CODE]. Expect to increased based on new integrations</td>
+</tr>
+<tr>
+<td>transactionChannel</td>
+<td>string</td>
+<td>the transaction channel, eg BCA, PERMATA,etc</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>the supported currency by the channel/method</td>
+</tr>
+<tr>
+<td>logo</td>
+<td>string</td>
+<td>the channel/method logo</td>
+</tr>
+</tbody></table>
+
+<p><h1 id='payments'>Payments</h1><h2 id='create-payments'>Create Payments</h2>
+<p>Create a payment request</p>
+
+<h3 id='http-request'>HTTP Request</h3>
+
+<p><code>POST https://&lt;xenith-api-host&gt;/v1/payments</code></p>
+
+<h3 id='request-headers'>Request Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header Name</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Zenith-Api-Key</td>
+<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Timestamp</td>
+<td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Signature</td>
+<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
+</tr>
+</tbody></table></p>
+
+<blockquote>
+<p>Request Example</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payments'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Debugging-Owner: John Brother Snow 2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+  "initiatedAmount": "100008",
+  "currency": "IDR",
+  "paymentChannel": "PERMATA",
+  "paymentMethod": "VIRTUAL_ACCOUNT",
+  "referenceCode": "test-referenceCode-1716098555",
+  "name": "John Snowy",
+  "description": "Hello",
+  "callbackUrl": "https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"
+}'</span>
+</code></pre></div><h3 id='body-parameters'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiatedAmount</td>
+<td>Y</td>
+<td>string/number</td>
+<td>the requested payment amount</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Y</td>
+<td>string</td>
+<td>currency, based on ISO 4217</td>
+</tr>
+<tr>
+<td>paymentChannel</td>
+<td>Y</td>
+<td>string</td>
+<td>the payment channel, eg BRI,BCA, DANA, OVO, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>paymentMethod</td>
+<td>Y</td>
+<td>string</td>
+<td>the payment method, eg VIRTUAL_ACCOUNT, QR_CODE, EWALLET, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>referenceCode</td>
+<td>Y</td>
+<td>string</td>
+<td>any text that you can use to identify the transaction (your transaction ID)</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Y</td>
+<td>string</td>
+<td>Payer name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>N</td>
+<td>string</td>
+<td>description</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>Y</td>
+<td>string</td>
+<td>your webhook server URL, we will send the transaction notification to this URL</td>
+</tr>
+</tbody></table>
+
+<h3 id='http-response'>HTTP Response</h3>
+
+<blockquote>
+<p>Response Example Code 201</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Snowy"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-referenceCode-1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232548645Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232548645Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expirationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T20:37:12.10478176Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212000337121083"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>id</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>payer name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>your description</td>
+</tr>
+<tr>
+<td>initiatedAmount</td>
+<td>string</td>
+<td>initiatedAmount</td>
+</tr>
+<tr>
+<td>paymentAmount</td>
+<td>string</td>
+<td>paymentAmount</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>ISO 4217 currency, eg, IDR, SGD, USD</td>
+</tr>
+<tr>
+<td>paymentChannel</td>
+<td>string</td>
+<td>Could be BCA, BRI, DANA, OVO, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>paymentMethod</td>
+<td>string</td>
+<td>Could be VIRTUAL_ACCOUNT, QR_CODE, EWALLET. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>referenceCode</td>
+<td>string</td>
+<td>reference code by merchant</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>payment status enum: [ PENDING, SUCCESS, EXPIRED, FAILED ]</td>
+</tr>
+<tr>
+<td>createdTime</td>
+<td>string ($date-time)</td>
+<td>Created Time in RFC3339 format</td>
+</tr>
+<tr>
+<td>updatedTime</td>
+<td>string ($date-time)</td>
+<td>Updated Time in RFC3339 format</td>
+</tr>
+<tr>
+<td>expirationTime</td>
+<td>string ($date-time)</td>
+<td>Expiration Time in RFC3339 format. Currently set by default to 1 day</td>
+</tr>
+<tr>
+<td>paymentCode</td>
+<td>string</td>
+<td>Can be VA number or QR code text</td>
+</tr>
+<tr>
+<td>paymentCodeType</td>
+<td>string</td>
+<td>enum: [ ACCOUNT_NUMBER, QR_TEXT, QR_LINK ]</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>your callback URL</td>
+</tr>
+</tbody></table>
+
+<h2 id='get-payment-detail'>Get Payment Detail</h2>
+
+<p>Get Payment Detail</p>
+
+<h3 id='http-request-2'>HTTP Request</h3>
+
+<p><code>GET http://example.com/v1/payments/{id}</code></p>
+
+<blockquote>
+<p>Request Example</p>
+</blockquote>
+
+<h3 id='request-headers-2'>Request Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header Name</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Zenith-Api-Key</td>
+<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Timestamp</td>
+<td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Signature</td>
+<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
+</tr>
+</tbody></table>
+
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payments/pymt-01HYK3GSJFXS2PJTKHSYT0G8FR'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-23T20:56:56.404Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: ak7uyB/pmhng2dDHpXuHW08Za9ba/IYfdWOjguk0ZFA='</span>
+</code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>payment ID</td>
+</tr>
+</tbody></table>
+
+<h3 id='http-response-2'>HTTP Response</h3>
+
+<blockquote>
+<p>Response Example Code 200</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYK3GSJFXS2PJTKHSYT0G8FR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AGENT BRI"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"take all my money"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87212"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87212"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refernce-45451"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T16:11:05.325204Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T16:11:15.097423Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expirationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T16:11:05.167422Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212002311056532"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>id</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>payer name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>your description</td>
+</tr>
+<tr>
+<td>initiatedAmount</td>
+<td>string</td>
+<td>initiatedAmount</td>
+</tr>
+<tr>
+<td>paymentAmount</td>
+<td>string</td>
+<td>paymentAmount</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>ISO 4217 currency, eg, IDR, SGD, USD</td>
+</tr>
+<tr>
+<td>paymentChannel</td>
+<td>string</td>
+<td>Could be BCA, BRI, DANA, OVO, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>paymentMethod</td>
+<td>string</td>
+<td>Could be VIRTUAL_ACCOUNT, QR_CODE, EWALLET. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>referenceCode</td>
+<td>string</td>
+<td>reference code by merchant</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>payment status enum: [ PENDING, SUCCESS, EXPIRED, FAILED ]</td>
+</tr>
+<tr>
+<td>createdTime</td>
+<td>string ($date-time)</td>
+<td>Created Time in RFC3339 format</td>
+</tr>
+<tr>
+<td>updatedTime</td>
+<td>string ($date-time)</td>
+<td>Updated Time in RFC3339 format</td>
+</tr>
+<tr>
+<td>expirationTime</td>
+<td>string ($date-time)</td>
+<td>Expiration Time in RFC3339 format. Currently set by default to 1 day</td>
+</tr>
+<tr>
+<td>paymentCode</td>
+<td>string</td>
+<td>Can be VA number or QR code text</td>
+</tr>
+<tr>
+<td>paymentCodeType</td>
+<td>string</td>
+<td>enum: [ ACCOUNT_NUMBER, QR_TEXT, QR_LINK ]</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>your callback URL</td>
+</tr>
+</tbody></table>
+
+<p><h1 id='payout'>Payout</h1><h2 id='create-payout'>Create Payout</h2>
+<p>Create a payout request</p>
+
+<h3 id='http-request'>HTTP Request</h3>
+
+<p><code>POST http://xenith-host/v1/payouts</code></p>
+
+<h3 id='request-headers'>Request Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header Name</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Zenith-Api-Key</td>
+<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Timestamp</td>
+<td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Signature</td>
+<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
+</tr>
+</tbody></table></p>
+
+<blockquote>
+<p>Request Example</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payouts'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-24T05:00:34.040Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: nckwDl0loxmui6m0XY2rG6k5jEo/AgyoxLAQ2DOoa+0='</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+    "description": "Sending Money-1716098555",
+    "initiatedAmount": 1500,
+    "callbackUrl": "https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07",
+    "currency": "IDR",
+    "destinationPayoutChannel": "PERMATA",
+    "destinationPayoutMethod": "BANK_TRANSFER",
+    "destinationPayoutAccount": "12188890005678",
+    "destinationPayoutAccountName": "Testing Name",
+    "referenceCode": "referenceCode - 1716098555"
+}'</span>
+</code></pre></div><h3 id='body-parameters'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>description</td>
+<td>N</td>
+<td>string</td>
+<td>free-form text for your</td>
+</tr>
+<tr>
+<td>initiatedAmount</td>
+<td>Y</td>
+<td>string/number</td>
+<td>the amount that you want to send</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>Y</td>
+<td>string</td>
+<td>your webhook URL</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Y</td>
+<td>string</td>
+<td>currency</td>
+</tr>
+<tr>
+<td>destinationPayoutChannel</td>
+<td>Y</td>
+<td>string</td>
+<td>the destination channel, eg BCA, BRI, PERMATA. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>destinationPayoutMethod</td>
+<td>Y</td>
+<td>string</td>
+<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>destinationPayoutAccount</td>
+<td>Y</td>
+<td>string</td>
+<td>the destination account, eg Bank account number</td>
+</tr>
+<tr>
+<td>destinationPayoutAccountName</td>
+<td>Y</td>
+<td>string</td>
+<td>the destination account-name, eg the bank accoutn owner name</td>
+</tr>
+<tr>
+<td>referenceCode</td>
+<td>Y</td>
+<td>string</td>
+<td>referenceCode for your own txn ID</td>
+</tr>
+</tbody></table>
+
+<h3 id='http-response'>HTTP Response</h3>
+
+<blockquote>
+<p>Response Example</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending Money-1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"referenceCode - 1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12188890005678"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutAccountName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Testing Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251272214Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251272214Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>id</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>description</td>
+</tr>
+<tr>
+<td>initiatedAmount</td>
+<td>string</td>
+<td>initiatedAmount</td>
+</tr>
+<tr>
+<td>sentAmount</td>
+<td>string</td>
+<td>sentAmount</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>your webhook url</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>your preferred currency</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>name enum: [ PENDING, SUCCESS, FAILED ]</td>
+</tr>
+<tr>
+<td>referenceCode</td>
+<td>string</td>
+<td>your own transaction ID</td>
+</tr>
+<tr>
+<td>destinationPayoutChannel</td>
+<td>string</td>
+<td>the payout channel, eg BCA, PERMATA, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>destinationPayoutMethod</td>
+<td>string</td>
+<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>destinationPayoutAccount</td>
+<td>string</td>
+<td>the account detail, eg 0412411131 (the bank account, or ewallet account number)</td>
+</tr>
+<tr>
+<td>destinationPayoutAccountName</td>
+<td>string</td>
+<td>the receiver name (bank account/ewallet account)</td>
+</tr>
+<tr>
+<td>createdTime</td>
+<td>string ($date-time)</td>
+<td>Created Time on RFC3339 Format</td>
+</tr>
+<tr>
+<td>updatedTime</td>
+<td>string ($date-time)</td>
+<td>Updated Time on RFC3339 Format</td>
+</tr>
+</tbody></table>
+
+<h2 id='get-payout-detail'>Get Payout Detail</h2>
+
+<p>Get Payout Detail</p>
+
+<h3 id='http-request-2'>HTTP Request</h3>
+
+<p><code>POST http://xenith-host/v1/payouts/:id</code></p>
+
+<h3 id='request-headers-2'>Request Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header Name</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Zenith-Api-Key</td>
+<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Timestamp</td>
+<td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
+</tr>
+<tr>
+<td>Zenith-Request-Signature</td>
+<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request Example</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payouts/pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-24T05:16:33.186Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: PmOnopSgg5ySiozwlC9kCZ8gFo1TNpw6wrb/SziHsEQ='</span>
+</code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>payout ID</td>
+</tr>
+</tbody></table>
+
+<h3 id='http-response-2'>HTTP Response</h3>
+
+<blockquote>
+<p>Response Example</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending Money-1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://helpless-bear-46.webhook.cool"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"referenceCode - 1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12188890005678"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destinationPayoutAccountName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Testing Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251272Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:35.440854Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>id</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>description</td>
+</tr>
+<tr>
+<td>initiatedAmount</td>
+<td>string</td>
+<td>initiatedAmount</td>
+</tr>
+<tr>
+<td>sentAmount</td>
+<td>string</td>
+<td>sentAmount</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>your webhook url</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>your preferred currency</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>name enum: [ PENDING, SUCCESS, FAILED ]</td>
+</tr>
+<tr>
+<td>referenceCode</td>
+<td>string</td>
+<td>your own transaction ID</td>
+</tr>
+<tr>
+<td>destinationPayoutChannel</td>
+<td>string</td>
+<td>the payout channel, eg BCA, PERMATA, etc</td>
+</tr>
+<tr>
+<td>destinationPayoutMethod</td>
+<td>string</td>
+<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]</td>
+</tr>
+<tr>
+<td>destinationPayoutAccount</td>
+<td>string</td>
+<td>the account detail, eg 0412411131 (the bank account, or ewallet account number)</td>
+</tr>
+<tr>
+<td>destinationPayoutAccountName</td>
+<td>string</td>
+<td>the receiver name (bank account/ewallet account)</td>
+</tr>
+<tr>
+<td>createdTime</td>
+<td>string ($date-time)</td>
+<td>Created Time on RFC3339 Format</td>
+</tr>
+<tr>
+<td>updatedTime</td>
+<td>string ($date-time)</td>
+<td>Updated Time on RFC3339 Format</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+You may received errors during your requests. Most common errors are can be seen in the list below. If you found any error un-identified here yet, please help to raise an issue to our support at help@xenithpay.com
+</aside>
+
+<p>Xenithpay may have these error codes</p>
+
+<table><thead>
+<tr>
+<th>Status Code</th>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>API_VALIDATION_ERROR</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>INVALID_AMOUNT</td>
+<td>The amount you hav enterred are not supported.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>INVALID_API_KEY</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>INVALID_SIGNATURE</td>
+<td>Your request signature is invalid</td>
+</tr>
+<tr>
+<td>401</td>
+<td>UNKNOWN_IP_ADDRESS</td>
+<td>Your IP address is not on the allowed-list</td>
+</tr>
+<tr>
+<td>401</td>
+<td>UNAUTHORIZED_ACCESS</td>
+<td>Unauthorized access</td>
+</tr>
+<tr>
+<td>403</td>
+<td>FORBIDDEN</td>
+<td>Forbidden -- You don&#39;t have enough permission to proceed the action</td>
+</tr>
+<tr>
+<td>404</td>
+<td>DATA_NOT_FOUND</td>
+<td>Not Found -- The specific requested data/item does not exists</td>
+</tr>
+<tr>
+<td>405</td>
+<td>NOT_ALLOWED</td>
+<td>Method Not Allowed -- You tried an endpoint with a wrong HTTP method</td>
+</tr>
+<tr>
+<td>408</td>
+<td>REQUEST_TIMEOUT</td>
+<td>The request is taking longer than expected, retry again</td>
+</tr>
+<tr>
+<td>409</td>
+<td>DATA_DUPLICATE/DATA_ALREADY_EXISTS</td>
+<td>Data is already exist</td>
+</tr>
+<tr>
+<td>422</td>
+<td>INSUFFICIENT_BALANCE</td>
+<td>You have insuficient balance to proceed the action</td>
+</tr>
+<tr>
+<td>500</td>
+<td>SERVER_ERROR</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>501</td>
+<td>NOT_IMPLEMENTED</td>
+<td>The service you&#39;re requesting are not supported yet</td>
+</tr>
+<tr>
+<td>503</td>
+<td>SERVICE_UNAVAILABLE</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
