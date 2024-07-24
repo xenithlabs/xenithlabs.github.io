@@ -335,10 +335,10 @@
               </ul>
           </li>
           <li>
-            <a href="#payments" class="toc-h1 toc-link" data-title="Payments">Payments</a>
+            <a href="#payins" class="toc-h1 toc-link" data-title="Payins">Payins</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-payments" class="toc-h2 toc-link" data-title="Create Payments">Create Payments</a>
+                    <a href="#create-payins" class="toc-h2 toc-link" data-title="Create Payins">Create Payins</a>
                   </li>
                   <li>
                     <a href="#get-payment-detail" class="toc-h2 toc-link" data-title="Get Payment Detail">Get Payment Detail</a>
@@ -443,11 +443,11 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 </thead><tbody>
 <tr>
 <td><code>HTTP METHOD + &quot;\n&quot; + URI + &quot;\n&quot; + TIMESTAMP</code></td>
-<td>POST<br>/v1/payments<br>2024-05-10T16:42:22.802Z</td>
+<td>POST<br>/v1/payins<br>2024-05-10T16:42:22.802Z</td>
 </tr>
 </tbody></table>
 <h3 id='sign-the-signature'>Sign the Signature</h3>
-<p><code>signaturePayload= &quot;POST\n/v1/payments\n2024-05-10T16:42:22.802Z&quot;</code> <br>
+<p><code>signaturePayload= &quot;POST\n/v1/payins\n2024-05-10T16:42:22.802Z&quot;</code> <br>
 <code>var hash = CryptoJS.HmacSHA256(signaturePayload, &lt;Secret Key&gt;)</code><br>
 <code>signature = CryptoJS.enc.Base64.stringify(hash);</code><br></p>
 
@@ -586,12 +586,12 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </tbody></table>
 
-<p><h1 id='payments'>Payments</h1><h2 id='create-payments'>Create Payments</h2>
-<p>Create a payment request</p>
+<p><h1 id='payins'>Payins</h1><h2 id='create-payins'>Create Payins</h2>
+<p>Create a payin request</p>
 
 <h3 id='http-request'>HTTP Request</h3>
 
-<p><code>POST https://&lt;xenith-api-host&gt;/v1/payments</code></p>
+<p><code>POST https://&lt;xenith-api-host&gt;/v1/payins</code></p>
 
 <h3 id='request-headers'>Request Headers</h3>
 
@@ -619,7 +619,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 <p>Request Example</p>
 </blockquote>
 
-<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payments'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payins'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
@@ -815,7 +815,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 
 <h3 id='http-request-2'>HTTP Request</h3>
 
-<p><code>GET http://example.com/v1/payments/{id}</code></p>
+<p><code>GET http://example.com/v1/payins/{id}</code></p>
 
 <blockquote>
 <p>Request Example</p>
@@ -843,7 +843,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </tbody></table>
 
-<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payments/pymt-01HYK3GSJFXS2PJTKHSYT0G8FR'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payins/pymt-01HYK3GSJFXS2PJTKHSYT0G8FR'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:56:56.404Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: ak7uyB/pmhng2dDHpXuHW08Za9ba/IYfdWOjguk0ZFA='</span>
