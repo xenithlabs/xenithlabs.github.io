@@ -395,15 +395,15 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 </tr>
 </thead><tbody>
 <tr>
-<td>Zenith-Api-Key</td>
+<td>Xenith-Api-Key</td>
 <td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Timestamp</td>
+<td>Xenith-Request-Timestamp</td>
 <td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Signature</td>
+<td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
 </tr>
 </tbody></table>
@@ -453,7 +453,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 
 <p>Now finally, add the signature to every request header when calling the API for Zenith <br></p>
 
-<p><code>Zenith-Request-Signature = signature</code> <br></p>
+<p><code>Xenith-Request-Signature = signature</code> <br></p>
 
 <h1 id='transaction-methods'>Transaction Methods</h1><h2 id='fetch-available-transaction-methods'>Fetch Available Transaction Methods</h2>
 <p>This endpoint is used to see what is the available transaction method (both for Payment and Payout) for you.
@@ -468,15 +468,15 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </thead><tbody>
 <tr>
-<td>Zenith-Api-Key</td>
+<td>Xenith-Api-Key</td>
 <td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Timestamp</td>
+<td>Xenith-Request-Timestamp</td>
 <td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Signature</td>
+<td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
 </tr>
 </tbody></table>
@@ -485,9 +485,9 @@ This is personally picked based on what you have agreed during the onboarding. I
 <p>Request Example</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/transaction-methods'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-24T05:24:32.125Z'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: O++du6UvdJj4fN+J2rv5X4Tgqknc5HHZ++9ugYPG7us='</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:24:32.125Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: O++du6UvdJj4fN+J2rv5X4Tgqknc5HHZ++9ugYPG7us='</span>
 </code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -602,15 +602,15 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </thead><tbody>
 <tr>
-<td>Zenith-Api-Key</td>
+<td>Xenith-Api-Key</td>
 <td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Timestamp</td>
+<td>Xenith-Request-Timestamp</td>
 <td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Signature</td>
+<td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
 </tr>
 </tbody></table></p>
@@ -620,9 +620,9 @@ This is personally picked based on what you have agreed during the onboarding. I
 </blockquote>
 
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payments'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Debugging-Owner: John Brother Snow 2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
@@ -830,23 +830,23 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </thead><tbody>
 <tr>
-<td>Zenith-Api-Key</td>
+<td>Xenith-Api-Key</td>
 <td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Timestamp</td>
+<td>Xenith-Request-Timestamp</td>
 <td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Signature</td>
+<td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
 </tr>
 </tbody></table>
 
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payments/pymt-01HYK3GSJFXS2PJTKHSYT0G8FR'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-23T20:56:56.404Z'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: ak7uyB/pmhng2dDHpXuHW08Za9ba/IYfdWOjguk0ZFA='</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:56:56.404Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: ak7uyB/pmhng2dDHpXuHW08Za9ba/IYfdWOjguk0ZFA='</span>
 </code></pre></div>
 
 <table><thead>
@@ -994,15 +994,15 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </thead><tbody>
 <tr>
-<td>Zenith-Api-Key</td>
+<td>Xenith-Api-Key</td>
 <td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Timestamp</td>
+<td>Xenith-Request-Timestamp</td>
 <td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Signature</td>
+<td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
 </tr>
 </tbody></table></p>
@@ -1013,9 +1013,9 @@ This is personally picked based on what you have agreed during the onboarding. I
 
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payouts'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-24T05:00:34.040Z'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: nckwDl0loxmui6m0XY2rG6k5jEo/AgyoxLAQ2DOoa+0='</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:00:34.040Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: nckwDl0loxmui6m0XY2rG6k5jEo/AgyoxLAQ2DOoa+0='</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
     "description": "Sending Money-1716098555",
     "initiatedAmount": 1500,
@@ -1212,15 +1212,15 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </thead><tbody>
 <tr>
-<td>Zenith-Api-Key</td>
+<td>Xenith-Api-Key</td>
 <td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Timestamp</td>
+<td>Xenith-Request-Timestamp</td>
 <td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
 </tr>
 <tr>
-<td>Zenith-Request-Signature</td>
+<td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
 </tr>
 </tbody></table>
@@ -1230,9 +1230,9 @@ This is personally picked based on what you have agreed during the onboarding. I
 </blockquote>
 
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://xenith-host/v1/payouts/pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Timestamp: 2024-05-24T05:16:33.186Z'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Zenith-Request-Signature: PmOnopSgg5ySiozwlC9kCZ8gFo1TNpw6wrb/SziHsEQ='</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:16:33.186Z'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: PmOnopSgg5ySiozwlC9kCZ8gFo1TNpw6wrb/SziHsEQ='</span>
 </code></pre></div>
 
 <table><thead>
