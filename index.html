@@ -634,7 +634,8 @@ This is personally picked based on what you have agreed during the onboarding. I
   "name": "John Snowy",
   "description": "Hello",
   "callbackUrl": "https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07",
-  "customerReference": "test-customerReference-123"
+  "customerReference": "test-customerReference-123",
+  "redirectUrl": "https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"
 }'</span>
 </code></pre></div><h3 id='body-parameters'>Body Parameters</h3>
 <table><thead>
@@ -699,6 +700,12 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>string</td>
 <td>code that refers to a customer</td>
 </tr>
+<tr>
+<td>redirectUrl</td>
+<td>N</td>
+<td>string</td>
+<td>redirect url used for the payment</td>
+</tr>
 </tbody></table>
 
 <h3 id='http-response'>HTTP Response</h3>
@@ -724,7 +731,8 @@ This is personally picked based on what you have agreed during the onboarding. I
   </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212000337121083"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="w">
+  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -819,6 +827,11 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>customerReference</td>
 <td>string</td>
 <td>Code that refers to a customer</td>
+</tr>
+<tr>
+<td>redirectUrl</td>
+<td>N</td>
+<td>string</td>
 </tr>
 </tbody></table>
 
@@ -899,7 +912,8 @@ This is personally picked based on what you have agreed during the onboarding. I
   </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212002311056532"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="w">
+  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -994,6 +1008,11 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>customerReference</td>
 <td>string</td>
 <td>Code that refers to a customer</td>
+</tr>
+<tr>
+<td>redirectUrl</td>
+<td>string</td>
+<td>redirect url used for the payment</td>
 </tr>
 </tbody></table>
 
