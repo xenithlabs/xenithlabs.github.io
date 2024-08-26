@@ -303,7 +303,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-0f25cc8d.png" class="logo" alt="" />
+      <img src="images/logo-32a37019.png" class="logo" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
         </div>
@@ -1469,13 +1469,13 @@ This is personally picked based on what you have agreed during the onboarding. I
 <span class="nt">--data</span> <span class="s1">'{
   "initiatedAmount": "100008",
   "currency": "IDR",
-  "paymentChannel": "PERMATA",
   "paymentMethod": "VIRTUAL_ACCOUNT",
+  "paymentChannel": "PERMATA",
   "referenceCode": "test-referenceCode-1716098555",
+  "customerReference": "test-customerReference-123",
   "customerName": "John Snowy",
   "description": "Hello",
   "callbackUrl": "https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07",
-  "customerReference": "test-customerReference-123",
   "redirectUrl": "https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"
 }'</span>
 </code></pre></div><h3 id='body-parameters'>Body Parameters</h3>
@@ -1539,13 +1539,13 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>callbackUrl</td>
 <td>Y</td>
 <td>string</td>
-<td>Tour webhook server URL, we will send the transaction notification to this URL</td>
+<td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 <tr>
 <td>redirectUrl</td>
 <td>N</td>
 <td>string</td>
-<td>redirect url used for the payment</td>
+<td>URL where the end-customer is redirected to after the transaction is completed.</td>
 </tr>
 </tbody></table>
 <h3 id='http-response'>HTTP Response</h3>
@@ -1554,23 +1554,23 @@ This is personally picked based on what you have agreed during the onboarding. I
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"customerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Snowy"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212000337121083"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-referenceCode-1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Snowy"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232548645Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232548645Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"expirationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T20:37:12.10478176Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212000337121083"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="w">
+  </span><span class="nl">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -1734,24 +1734,24 @@ This is personally picked based on what you have agreed during the onboarding. I
 </blockquote>
 
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYK3GSJFXS2PJTKHSYT0G8FR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"customerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AGENT BRI"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"take all my money"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87212"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87212"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refernce-45451"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T16:11:05.325204Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T16:11:15.097423Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"expirationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T16:11:05.167422Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212002311056532"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212000337121083"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-referenceCode-1716098555"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="w">
+  </span><span class="nl">"customerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Snowy"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232548645Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232548645Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expirationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T20:37:12.10478176Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://redirect-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -1893,9 +1893,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:00:34.040Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: nckwDl0loxmui6m0XY2rG6k5jEo/AgyoxLAQ2DOoa+0='</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
-    "description": "Sending Money-1716098555",
     "initiatedAmount": 1500,
-    "callbackUrl": "https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07",
     "currency": "IDR",
     "destinationPayoutChannel": "PERMATA",
     "destinationPayoutMethod": "BANK_TRANSFER",
@@ -1903,6 +1901,8 @@ This is personally picked based on what you have agreed during the onboarding. I
     "destinationPayoutAccountName": "Testing Name",
     "referenceCode": "referenceCode - 1716098555",
     "customerReference": "test-customerReference-123",
+    "description": "Sending Money-1716098555",
+    "callbackUrl": "https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07",
 }'</span>
 </code></pre></div><h3 id='body-parameters'>Body Parameters</h3>
 <table><thead>
@@ -1983,19 +1983,20 @@ This is personally picked based on what you have agreed during the onboarding. I
 
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending Money-1716098555"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"referenceCode - 1716098555"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12188890005678"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutAccountName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Testing Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"referenceCode - 1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251272214Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251272214Z"</span><span class="w">
+  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251272214Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending Money-1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -2145,19 +2146,20 @@ This is personally picked based on what you have agreed during the onboarding. I
 
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending Money-1716098555"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://helpless-bear-46.webhook.cool"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"referenceCode - 1716098555"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12188890005678"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutAccountName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Testing Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"referenceCode - 1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251272Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:35.440854Z"</span><span class="w">
+  </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:35.440854Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending Money-1716098555"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://helpless-bear-46.webhook.cool"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -2248,8 +2250,6 @@ This is personally picked based on what you have agreed during the onboarding. I
 <aside class="notice">
 You may encounter errors during your requests. The most common errors are listed below. If you come across an error not listed here, please report it to our support team at help@xenithpay.com.
 </aside>
-
-<p>Xenithpay may have these error codes</p>
 
 <table><thead>
 <tr>
