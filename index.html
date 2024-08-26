@@ -358,7 +358,7 @@
             <a href="#payins" class="toc-h1 toc-link" data-title="Payins">Payins</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-payins" class="toc-h2 toc-link" data-title="Create Payins">Create Payins</a>
+                    <a href="#create-pay-in-request" class="toc-h2 toc-link" data-title="Create Pay In Request">Create Pay In Request</a>
                   </li>
                   <li>
                     <a href="#get-payment-detail" class="toc-h2 toc-link" data-title="Get Payment Detail">Get Payment Detail</a>
@@ -369,7 +369,7 @@
             <a href="#payout" class="toc-h1 toc-link" data-title="Payout">Payout</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-payout" class="toc-h2 toc-link" data-title="Create Payout">Create Payout</a>
+                    <a href="#create-pay-out-request" class="toc-h2 toc-link" data-title="Create Pay Out Request">Create Pay Out Request</a>
                   </li>
                   <li>
                     <a href="#get-payout-detail" class="toc-h2 toc-link" data-title="Get Payout Detail">Get Payout Detail</a>
@@ -386,21 +386,17 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 
-<p>Welcome to Xenithpay API Documentation.
-Make sure you have get your account approved and ready for development and testing, and finally to go-live.
-Contact our support for any inquiries at help@xenithpay.com</p>
+<p>The Xenithpay API is organized around REST. Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features and HTTP verbs, which are understood by off-the-shelf HTTP clients. JSON is returned by all API responses, including errors.</p>
+
+<p>Feel free to reach out to us at <a href="mailto:help@xenithpay.com">help@xenithpay.com</a> if you have any inquiries.</p>
 
 <h1 id='authentication'>Authentication</h1>
 
-<blockquote>
-<p>Example of Secret and Access Key</p>
-</blockquote>
+<p>To successfully authenticate with Xenithpay’s APIs, you will need to obtain your Access Key &amp; Secret Key from the Dashboard. Your keys should be kept private so do not share your keys.. This is an example of how your Access Key and Secret Key will look like. </p>
 
 <div class="highlight"><pre class="highlight sh tab-shell"><code>Secret key: sk-760a8a0c8826b2e9dd8fe3ed0c66976f0c3d4a0443056674b7c132a25ddbbaf6eed1a410e02609a0a9791d7683c5de83860574bf6a92ddf8ea5a14360a96ac3c
 Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 </code></pre></div>
-
-<p>To authenticate your request you will need to prepare a few items before actually making the request to our API.</p>
 
 <ul>
 <li>Create your Access Key and Secret Key from our Dashboard. See the example of how the Access Key and Secret Key looks like.</li>
@@ -430,7 +426,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 
 <h2 id='build-signature'>Build Signature</h2>
 
-<p>Also can see the example on the right-side to see how to make it on Javascript</p>
+<p>View the example on the right for reference.</p>
 
 <blockquote>
 <p>How to Generate Signature on Postman Pre-Script</p>
@@ -1436,8 +1432,8 @@ This is personally picked based on what you have agreed during the onboarding. I
 <p>Response Code 204 (No Content)</p>
 </blockquote>
 
-<h1 id='payins'>Payins</h1><h2 id='create-payins'>Create Payins</h2>
-<p>Create a payin request</p>
+<h1 id='payins'>Payins</h1><h2 id='create-pay-in-request'>Create Pay In Request</h2>
+<p>You can use this end point to create a Pay In request.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://&lt;xenith-api-host&gt;/v1/payins</code></p>
 <h3 id='request-headers'>Request Headers</h3>
@@ -1476,7 +1472,7 @@ This is personally picked based on what you have agreed during the onboarding. I
   "paymentChannel": "PERMATA",
   "paymentMethod": "VIRTUAL_ACCOUNT",
   "referenceCode": "test-referenceCode-1716098555",
-  "name": "John Snowy",
+  "customerName": "John Snowy",
   "description": "Hello",
   "callbackUrl": "https://webhook-test.com/92dfd507c131242ad663cbfa0df59f07",
   "customerReference": "test-customerReference-123",
@@ -1495,55 +1491,55 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>initiatedAmount</td>
 <td>Y</td>
 <td>string/number</td>
-<td>the requested payment amount</td>
+<td>Requested amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>Y</td>
 <td>string</td>
-<td>currency, based on ISO 4217</td>
-</tr>
-<tr>
-<td>paymentChannel</td>
-<td>Y</td>
-<td>string</td>
-<td>the payment channel, eg BRI,BCA, DANA, OVO, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>ISO 4217 three-letter code of the transaction&#39;s currency.</td>
 </tr>
 <tr>
 <td>paymentMethod</td>
 <td>Y</td>
 <td>string</td>
-<td>the payment method, eg VIRTUAL_ACCOUNT, QR_CODE, EWALLET, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment method for this transaction. (e.g VIRTUAL_ACCOUNT, QR_CODE, EWALLET, etc)</td>
+</tr>
+<tr>
+<td>paymentChannel</td>
+<td>Y</td>
+<td>string</td>
+<td>Payment channel for this transaction. (e.g BCA, BRI, DANA, etc)</td>
 </tr>
 <tr>
 <td>referenceCode</td>
 <td>Y</td>
 <td>string</td>
-<td>any text that you can use to identify the transaction (your transaction ID)</td>
-</tr>
-<tr>
-<td>name</td>
-<td>Y</td>
-<td>string</td>
-<td>Payer name</td>
-</tr>
-<tr>
-<td>description</td>
-<td>N</td>
-<td>string</td>
-<td>description</td>
-</tr>
-<tr>
-<td>callbackUrl</td>
-<td>Y</td>
-<td>string</td>
-<td>your webhook server URL, we will send the transaction notification to this URL</td>
+<td>Merchant-provided identifier for this transaction.</td>
 </tr>
 <tr>
 <td>customerReference</td>
 <td>Y</td>
 <td>string</td>
-<td>code that refers to a customer</td>
+<td>Merchant-provided identifier for the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>customerName</td>
+<td>Y</td>
+<td>string</td>
+<td>Merchant-provided name of the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>N</td>
+<td>string</td>
+<td>Free-text field for any additional information regarding the payment method.</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>Y</td>
+<td>string</td>
+<td>Tour webhook server URL, we will send the transaction notification to this URL</td>
 </tr>
 <tr>
 <td>redirectUrl</td>
@@ -1558,7 +1554,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Snowy"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Snowy"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
@@ -1588,72 +1584,37 @@ This is personally picked based on what you have agreed during the onboarding. I
 <tr>
 <td>id</td>
 <td>string</td>
-<td>id</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>payer name</td>
-</tr>
-<tr>
-<td>description</td>
-<td>string</td>
-<td>your description</td>
+<td>Unique identifier for this transaction.</td>
 </tr>
 <tr>
 <td>initiatedAmount</td>
 <td>string</td>
-<td>initiatedAmount</td>
+<td>Requested amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>paymentAmount</td>
 <td>string</td>
-<td>paymentAmount</td>
+<td>Payment amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>string</td>
-<td>ISO 4217 currency, eg, IDR, SGD, USD</td>
-</tr>
-<tr>
-<td>paymentChannel</td>
-<td>string</td>
-<td>Could be BCA, BRI, DANA, OVO, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>ISO 4217 three-letter code of the transaction&#39;s currency.</td>
 </tr>
 <tr>
 <td>paymentMethod</td>
 <td>string</td>
-<td>Could be VIRTUAL_ACCOUNT, QR_CODE, EWALLET. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment method for this transaction. (e.g VIRTUAL_ACCOUNT, QR_CODE, EWALLET, etc)</td>
 </tr>
 <tr>
-<td>referenceCode</td>
+<td>paymentChannel</td>
 <td>string</td>
-<td>reference code by merchant</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>payment status enum: [ PENDING, SUCCESS, EXPIRED, FAILED ]</td>
-</tr>
-<tr>
-<td>createdTime</td>
-<td>string ($date-time)</td>
-<td>Created Time in RFC3339 format</td>
-</tr>
-<tr>
-<td>updatedTime</td>
-<td>string ($date-time)</td>
-<td>Updated Time in RFC3339 format</td>
-</tr>
-<tr>
-<td>expirationTime</td>
-<td>string ($date-time)</td>
-<td>Expiration Time in RFC3339 format. Currently set by default to 1 day</td>
+<td>Payment channel for this transaction. (e.g BCA, BRI, DANA, etc)</td>
 </tr>
 <tr>
 <td>paymentCode</td>
 <td>string</td>
-<td>Can be VA number or QR code text</td>
+<td>Payment code used for this transaction. (VA Number, QR String, Account Number)</td>
 </tr>
 <tr>
 <td>paymentCodeType</td>
@@ -1661,25 +1622,60 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>enum: [ ACCOUNT_NUMBER, QR_TEXT, QR_LINK ]</td>
 </tr>
 <tr>
-<td>callbackUrl</td>
+<td>referenceCode</td>
 <td>string</td>
-<td>your callback URL</td>
+<td>Merchant-provided identifier for this transaction.</td>
 </tr>
 <tr>
 <td>customerReference</td>
 <td>string</td>
-<td>Code that refers to a customer</td>
+<td>Merchant-provided identifier for the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>customerName</td>
+<td>string</td>
+<td>Merchant-provided name of the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status of the Pay In. Possible values: [ PENDING, SUCCESS, EXPIRED, FAILED ]</td>
+</tr>
+<tr>
+<td>createdTime</td>
+<td>string ($date-time)</td>
+<td>Pay in created time in RFC3339 format. (Timezone UTC+0)</td>
+</tr>
+<tr>
+<td>updatedTime</td>
+<td>string ($date-time)</td>
+<td>Pay in updated time in RFC3339 format. (Timezone UTC+0)</td>
+</tr>
+<tr>
+<td>expirationTime</td>
+<td>string ($date-time)</td>
+<td>Pay in expiration time in RFC3339 format. (Timezone UTC+0) Pay in will be expired at expiration time.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Free-text field for any additional information regarding the payment method.</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 <tr>
 <td>redirectUrl</td>
-<td>N</td>
 <td>string</td>
+<td>URL where the end-customer is redirected to after a the Pay in is completed.</td>
 </tr>
 </tbody></table>
 
 <h2 id='get-payment-detail'>Get Payment Detail</h2>
 
-<p>Get Payment Detail</p>
+<p>This endpoints returns the corresponding information of the Pay In that matches the provided ID.</p>
 
 <h3 id='http-request-2'>HTTP Request</h3>
 
@@ -1727,7 +1723,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 <tr>
 <td>id</td>
 <td>string</td>
-<td>payment ID</td>
+<td>Unique identifier for this transaction.</td>
 </tr>
 </tbody></table>
 
@@ -1739,7 +1735,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYK3GSJFXS2PJTKHSYT0G8FR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AGENT BRI"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AGENT BRI"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"take all my money"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87212"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87212"</span><span class="p">,</span><span class="w">
@@ -1769,72 +1765,37 @@ This is personally picked based on what you have agreed during the onboarding. I
 <tr>
 <td>id</td>
 <td>string</td>
-<td>id</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>payer name</td>
-</tr>
-<tr>
-<td>description</td>
-<td>string</td>
-<td>your description</td>
+<td>Unique identifier for this transaction.</td>
 </tr>
 <tr>
 <td>initiatedAmount</td>
 <td>string</td>
-<td>initiatedAmount</td>
+<td>Requested amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>paymentAmount</td>
 <td>string</td>
-<td>paymentAmount</td>
+<td>Payment amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>string</td>
-<td>ISO 4217 currency, eg, IDR, SGD, USD</td>
-</tr>
-<tr>
-<td>paymentChannel</td>
-<td>string</td>
-<td>Could be BCA, BRI, DANA, OVO, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>ISO 4217 three-letter code of the transaction&#39;s currency.</td>
 </tr>
 <tr>
 <td>paymentMethod</td>
 <td>string</td>
-<td>Could be VIRTUAL_ACCOUNT, QR_CODE, EWALLET. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment method for this transaction. (e.g VIRTUAL_ACCOUNT, QR_CODE, EWALLET, etc)</td>
 </tr>
 <tr>
-<td>referenceCode</td>
+<td>paymentChannel</td>
 <td>string</td>
-<td>reference code by merchant</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>payment status enum: [ PENDING, SUCCESS, EXPIRED, FAILED ]</td>
-</tr>
-<tr>
-<td>createdTime</td>
-<td>string ($date-time)</td>
-<td>Created Time in RFC3339 format</td>
-</tr>
-<tr>
-<td>updatedTime</td>
-<td>string ($date-time)</td>
-<td>Updated Time in RFC3339 format</td>
-</tr>
-<tr>
-<td>expirationTime</td>
-<td>string ($date-time)</td>
-<td>Expiration Time in RFC3339 format. Currently set by default to 1 day</td>
+<td>Payment channel for this transaction. (e.g BCA, BRI, DANA, etc)</td>
 </tr>
 <tr>
 <td>paymentCode</td>
 <td>string</td>
-<td>Can be VA number or QR code text</td>
+<td>Payment code used for this transaction. (VA Number, QR String, Account Number)</td>
 </tr>
 <tr>
 <td>paymentCodeType</td>
@@ -1842,24 +1803,59 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>enum: [ ACCOUNT_NUMBER, QR_TEXT, QR_LINK ]</td>
 </tr>
 <tr>
-<td>callbackUrl</td>
+<td>referenceCode</td>
 <td>string</td>
-<td>your callback URL</td>
+<td>Merchant-provided identifier for this transaction.</td>
 </tr>
 <tr>
 <td>customerReference</td>
 <td>string</td>
-<td>Code that refers to a customer</td>
+<td>Merchant-provided identifier for the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>customerName</td>
+<td>string</td>
+<td>Merchant-provided name of the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status of the Pay In. Possible values: [ PENDING, SUCCESS, EXPIRED, FAILED ]</td>
+</tr>
+<tr>
+<td>createdTime</td>
+<td>string ($date-time)</td>
+<td>Pay in created time in RFC3339 format. (Timezone UTC+0)</td>
+</tr>
+<tr>
+<td>updatedTime</td>
+<td>string ($date-time)</td>
+<td>Pay in updated time in RFC3339 format. (Timezone UTC+0)</td>
+</tr>
+<tr>
+<td>expirationTime</td>
+<td>string ($date-time)</td>
+<td>Pay in expiration time in RFC3339 format. (Timezone UTC+0) Pay in will be expired at expiration time.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Free-text field for any additional information regarding the payment method.</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 <tr>
 <td>redirectUrl</td>
 <td>string</td>
-<td>redirect url used for the payment</td>
+<td>URL where the end-customer is redirected to after a the Pay in is completed.</td>
 </tr>
 </tbody></table>
 
-<p><h1 id='payout'>Payout</h1><h2 id='create-payout'>Create Payout</h2>
-<p>Create a payout request</p>
+<p><h1 id='payout'>Payout</h1><h2 id='create-pay-out-request'>Create Pay Out Request</h2>
+<p>You can use this end point to create a Pay out request. </p>
 
 <h3 id='http-request'>HTTP Request</h3>
 
@@ -1905,7 +1901,8 @@ This is personally picked based on what you have agreed during the onboarding. I
     "destinationPayoutMethod": "BANK_TRANSFER",
     "destinationPayoutAccount": "12188890005678",
     "destinationPayoutAccountName": "Testing Name",
-    "referenceCode": "referenceCode - 1716098555"
+    "referenceCode": "referenceCode - 1716098555",
+    "customerReference": "test-customerReference-123",
 }'</span>
 </code></pre></div><h3 id='body-parameters'>Body Parameters</h3>
 <table><thead>
@@ -1917,58 +1914,64 @@ This is personally picked based on what you have agreed during the onboarding. I
 </tr>
 </thead><tbody>
 <tr>
-<td>description</td>
-<td>N</td>
-<td>string</td>
-<td>free-form text for your</td>
-</tr>
-<tr>
 <td>initiatedAmount</td>
 <td>Y</td>
 <td>string/number</td>
-<td>the amount that you want to send</td>
-</tr>
-<tr>
-<td>callbackUrl</td>
-<td>Y</td>
-<td>string</td>
-<td>your webhook URL</td>
+<td>Requested amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>Y</td>
 <td>string</td>
-<td>currency</td>
-</tr>
-<tr>
-<td>destinationPayoutChannel</td>
-<td>Y</td>
-<td>string</td>
-<td>the destination channel, eg BCA, BRI, PERMATA. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>ISO 4217 three-letter code of the transaction&#39;s currency.</td>
 </tr>
 <tr>
 <td>destinationPayoutMethod</td>
 <td>Y</td>
 <td>string</td>
-<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment method for this transaction. (e.g BANK_TRANSFER)</td>
+</tr>
+<tr>
+<td>destinationPayoutChannel</td>
+<td>Y</td>
+<td>string</td>
+<td>Payment channel for this transaction. (e.g BCA, BRI, DANA, etc)</td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
 <td>Y</td>
 <td>string</td>
-<td>the destination account, eg Bank account number</td>
+<td>Account number of destination.</td>
 </tr>
 <tr>
 <td>destinationPayoutAccountName</td>
 <td>Y</td>
 <td>string</td>
-<td>the destination account-name, eg the bank accoutn owner name</td>
+<td>Name of account holder as per the bank records. Needs to match the registered account name exactly.</td>
 </tr>
 <tr>
 <td>referenceCode</td>
 <td>Y</td>
 <td>string</td>
-<td>referenceCode for your own txn ID</td>
+<td>Merchant-provided identifier for this transaction.</td>
+</tr>
+<tr>
+<td>customerReference</td>
+<td>Y</td>
+<td>string</td>
+<td>Merchant-provided identifier for the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>N</td>
+<td>string</td>
+<td>Free-text field for any additional information regarding the payment method.</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>Y</td>
+<td>string</td>
+<td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 </tbody></table>
 
@@ -2006,12 +2009,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 <tr>
 <td>id</td>
 <td>string</td>
-<td>id</td>
-</tr>
-<tr>
-<td>description</td>
-<td>string</td>
-<td>description</td>
+<td>Unique identifier for this transaction.</td>
 </tr>
 <tr>
 <td>initiatedAmount</td>
@@ -2022,36 +2020,21 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>sentAmount</td>
 <td>string</td>
 <td>sentAmount</td>
-</tr>
-<tr>
-<td>callbackUrl</td>
-<td>string</td>
-<td>your webhook url</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>string</td>
-<td>your preferred currency</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>name enum: [ PENDING, SUCCESS, FAILED ]</td>
-</tr>
-<tr>
-<td>referenceCode</td>
-<td>string</td>
-<td>your own transaction ID</td>
-</tr>
-<tr>
-<td>destinationPayoutChannel</td>
-<td>string</td>
-<td>the payout channel, eg BCA, PERMATA, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>ISO 4217 three-letter code of the transaction&#39;s currency.</td>
 </tr>
 <tr>
 <td>destinationPayoutMethod</td>
 <td>string</td>
 <td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>destinationPayoutChannel</td>
+<td>string</td>
+<td>the payout channel, eg BCA, PERMATA, etc. See <a href="#transaction-methods">transaction-methods</a></td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
@@ -2064,20 +2047,45 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>the receiver name (bank account/ewallet account)</td>
 </tr>
 <tr>
+<td>referenceCode</td>
+<td>string</td>
+<td>your own transaction ID</td>
+</tr>
+<tr>
+<td>customerReference</td>
+<td>string</td>
+<td>Merchant-provided identifier for the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status of the Pay In. Possible values: [ PENDING, SUCCESS, FAILED ]</td>
+</tr>
+<tr>
 <td>createdTime</td>
 <td>string ($date-time)</td>
-<td>Created Time on RFC3339 Format</td>
+<td>Pay out created time in RFC3339 format. (Timezone UTC+0)</td>
 </tr>
 <tr>
 <td>updatedTime</td>
 <td>string ($date-time)</td>
-<td>Updated Time on RFC3339 Format</td>
+<td>Pay in updated time in RFC3339 format. (Timezone UTC+0)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Free-text field for any additional information regarding the payment method.</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 </tbody></table>
 
 <h2 id='get-payout-detail'>Get Payout Detail</h2>
 
-<p>Get Payout Detail</p>
+<p>This endpoints returns the corresponding information of the Pay Out that matches the provided ID.</p>
 
 <h3 id='http-request-2'>HTTP Request</h3>
 
@@ -2125,7 +2133,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 <tr>
 <td>id</td>
 <td>string</td>
-<td>payout ID</td>
+<td>Unique identifier for this transaction.</td>
 </tr>
 </tbody></table>
 
@@ -2163,12 +2171,7 @@ This is personally picked based on what you have agreed during the onboarding. I
 <tr>
 <td>id</td>
 <td>string</td>
-<td>id</td>
-</tr>
-<tr>
-<td>description</td>
-<td>string</td>
-<td>description</td>
+<td>Unique identifier for this transaction.</td>
 </tr>
 <tr>
 <td>initiatedAmount</td>
@@ -2179,36 +2182,21 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>sentAmount</td>
 <td>string</td>
 <td>sentAmount</td>
-</tr>
-<tr>
-<td>callbackUrl</td>
-<td>string</td>
-<td>your webhook url</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>string</td>
-<td>your preferred currency</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>name enum: [ PENDING, SUCCESS, FAILED ]</td>
-</tr>
-<tr>
-<td>referenceCode</td>
-<td>string</td>
-<td>your own transaction ID</td>
-</tr>
-<tr>
-<td>destinationPayoutChannel</td>
-<td>string</td>
-<td>the payout channel, eg BCA, PERMATA, etc</td>
+<td>ISO 4217 three-letter code of the transaction&#39;s currency.</td>
 </tr>
 <tr>
 <td>destinationPayoutMethod</td>
 <td>string</td>
-<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]</td>
+<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]. See <a href="#transaction-methods">transaction-methods</a></td>
+</tr>
+<tr>
+<td>destinationPayoutChannel</td>
+<td>string</td>
+<td>the payout channel, eg BCA, PERMATA, etc. See <a href="#transaction-methods">transaction-methods</a></td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
@@ -2221,19 +2209,44 @@ This is personally picked based on what you have agreed during the onboarding. I
 <td>the receiver name (bank account/ewallet account)</td>
 </tr>
 <tr>
+<td>referenceCode</td>
+<td>string</td>
+<td>your own transaction ID</td>
+</tr>
+<tr>
+<td>customerReference</td>
+<td>string</td>
+<td>Merchant-provided identifier for the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Status of the Pay In. Possible values: [ PENDING, SUCCESS, FAILED ]</td>
+</tr>
+<tr>
 <td>createdTime</td>
 <td>string ($date-time)</td>
-<td>Created Time on RFC3339 Format</td>
+<td>Pay out created time in RFC3339 format. (Timezone UTC+0)</td>
 </tr>
 <tr>
 <td>updatedTime</td>
 <td>string ($date-time)</td>
-<td>Updated Time on RFC3339 Format</td>
+<td>Pay in updated time in RFC3339 format. (Timezone UTC+0)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Free-text field for any additional information regarding the payment method.</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
-You may received errors during your requests. Most common errors are can be seen in the list below. If you found any error un-identified here yet, please help to raise an issue to our support at help@xenithpay.com
+You may encounter errors during your requests. The most common errors are listed below. If you come across an error not listed here, please report it to our support team at help@xenithpay.com.
 </aside>
 
 <p>Xenithpay may have these error codes</p>
@@ -2248,77 +2261,77 @@ You may received errors during your requests. Most common errors are can be seen
 <tr>
 <td>400</td>
 <td>API_VALIDATION_ERROR</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>Invalid request errors arise when your request has invalid parameters</td>
 </tr>
 <tr>
 <td>400</td>
 <td>INVALID_AMOUNT</td>
-<td>The amount you hav enterred are not supported.</td>
+<td>The amount entered is not supported.</td>
 </tr>
 <tr>
 <td>401</td>
 <td>INVALID_API_KEY</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>The API key provided is incorrect.</td>
 </tr>
 <tr>
 <td>401</td>
 <td>INVALID_SIGNATURE</td>
-<td>Your request signature is invalid</td>
+<td>The request signature is invalid.</td>
 </tr>
 <tr>
 <td>401</td>
 <td>UNKNOWN_IP_ADDRESS</td>
-<td>Your IP address is not on the allowed-list</td>
+<td>The IP address is not on the allowed list.</td>
 </tr>
 <tr>
 <td>401</td>
 <td>UNAUTHORIZED_ACCESS</td>
-<td>Unauthorized access</td>
+<td>Access is denied.</td>
 </tr>
 <tr>
 <td>403</td>
 <td>FORBIDDEN</td>
-<td>Forbidden -- You don&#39;t have enough permission to proceed the action</td>
+<td>Insufficient permissions to proceed with the action.</td>
 </tr>
 <tr>
 <td>404</td>
 <td>DATA_NOT_FOUND</td>
-<td>Not Found -- The specific requested data/item does not exists</td>
+<td>The requested data/item does not exist.</td>
 </tr>
 <tr>
 <td>405</td>
 <td>NOT_ALLOWED</td>
-<td>Method Not Allowed -- You tried an endpoint with a wrong HTTP method</td>
+<td>The endpoint was accessed with an incorrect HTTP method.</td>
 </tr>
 <tr>
 <td>408</td>
 <td>REQUEST_TIMEOUT</td>
-<td>The request is taking longer than expected, retry again</td>
+<td>The request is taking longer than expected. Please contact support or try again.</td>
 </tr>
 <tr>
 <td>409</td>
 <td>DATA_DUPLICATE/DATA_ALREADY_EXISTS</td>
-<td>Data is already exist</td>
+<td>The data is already exist.</td>
 </tr>
 <tr>
 <td>422</td>
 <td>INSUFFICIENT_BALANCE</td>
-<td>You have insuficient balance to proceed the action</td>
+<td>Insufficient balance to proceed with the action.</td>
 </tr>
 <tr>
 <td>500</td>
 <td>SERVER_ERROR</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+<td>An issue occurred on our server. Please contact support or try again later.</td>
 </tr>
 <tr>
 <td>501</td>
 <td>NOT_IMPLEMENTED</td>
-<td>The service you&#39;re requesting are not supported yet</td>
+<td>The service requested is not supported yet.</td>
 </tr>
 <tr>
 <td>503</td>
 <td>SERVICE_UNAVAILABLE</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>The service is temporarily offline for maintenance. Please contact support or try again later.</td>
 </tr>
 </tbody></table>
 
