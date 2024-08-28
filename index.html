@@ -299,7 +299,7 @@
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar-cad8cdcb.png" alt="" />
+        <img src="images/navbar-c12c5126.png" alt="" />
       </span>
     </a>
     <div class="toc-wrapper">
@@ -364,18 +364,11 @@
 
 <h1 id='authentication'>Authentication</h1>
 
-<p>To successfully authenticate with Xenithpay’s APIs, you will need to obtain your Access Key &amp; Secret Key from the Dashboard. Your keys should be kept private so do not share your keys.. This is an example of how your Access Key and Secret Key will look like. </p>
+<p>To successfully authenticate with Xenithpay’s APIs, you will need to obtain your Access Key &amp; Secret Key from the Dashboard. Your keys should be kept private so do not share your keys. This is an example of how your Access Key and Secret Key will look like. </p>
 
 <div class="highlight"><pre class="highlight sh tab-shell"><code>Secret key: sk-760a8a0c8826b2e9dd8fe3ed0c66976f0c3d4a0443056674b7c132a25ddbbaf6eed1a410e02609a0a9791d7683c5de83860574bf6a92ddf8ea5a14360a96ac3c
 Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
-</code></pre></div>
-
-<ul>
-<li>Create your Access Key and Secret Key from our Dashboard. See the example of how the Access Key and Secret Key looks like.</li>
-</ul>
-
-<h2 id='request-headers'>Request Headers</h2>
-
+</code></pre></div><h2 id='request-headers'>Request Headers</h2>
 <table><thead>
 <tr>
 <th>Header Name</th>
@@ -395,15 +388,12 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
 </tr>
 </tbody></table>
-
 <h2 id='build-signature'>Build Signature</h2>
-
 <p>View the example on the right for reference.</p>
 
 <blockquote>
 <p>How to Generate Signature on Postman Pre-Script</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">secretKey</span> <span class="o">=</span>
   <span class="dl">"</span><span class="s2">sk-760a8a0c8826b2e9dd8fe3ed0c66976f0c3d4a0443056674b7c132a25ddbbaf6eed1a410e02609a0a9791d7683c5de83860574bf6a92ddf8ea5a14360a96ac3c</span><span class="dl">"</span><span class="p">;</span>
 <span class="c1">// Get the current timestamp in RFC3339 format</span>
@@ -532,7 +522,13 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>customerReference</td>
 <td>Y</td>
 <td>string</td>
-<td>Merchant-provided identifier for the Customer for this transaction.</td>
+<td>Merchant-provided identifier of the Customer for this transaction.</td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>customerName</td>
@@ -625,12 +621,12 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>paymentCode</td>
 <td>string</td>
-<td>Payment code used for this transaction. (VA Number, QR String, Account Number)</td>
+<td>Payment code used for this transaction. (e.g VA Number, QR String, Account Number)</td>
 </tr>
 <tr>
 <td>paymentCodeType</td>
 <td>string</td>
-<td>enum: [ ACCOUNT_NUMBER, QR_TEXT, QR_LINK ]</td>
+<td>Payment code type for this transaction. (e.g ACCOUNT_NUMBER, QR_TEXT, QR_LINK)</td>
 </tr>
 <tr>
 <td>referenceCode</td>
@@ -640,7 +636,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>customerReference</td>
 <td>string</td>
-<td>Merchant-provided identifier for the Customer for this transaction.</td>
+<td>Merchant-provided identifier of the Customer for this transaction.</td>
 </tr>
 <tr>
 <td>customerName</td>
@@ -665,7 +661,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>expirationTime</td>
 <td>string ($date-time)</td>
-<td>Pay in expiration time in RFC3339 format. (Timezone UTC+0) Pay in will be expired at expiration time.</td>
+<td>Pay in expiration time in RFC3339 format. (Timezone UTC+0) Pay in will be expired at the expiration time.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -806,12 +802,12 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>paymentCode</td>
 <td>string</td>
-<td>Payment code used for this transaction. (VA Number, QR String, Account Number)</td>
+<td>Payment code used for this transaction. (e.g VA Number, QR String, Account Number)</td>
 </tr>
 <tr>
 <td>paymentCodeType</td>
 <td>string</td>
-<td>enum: [ ACCOUNT_NUMBER, QR_TEXT, QR_LINK ]</td>
+<td>Payment code type for this transaction. (e.g ACCOUNT_NUMBER, QR_TEXT, QR_LINK)</td>
 </tr>
 <tr>
 <td>referenceCode</td>
@@ -821,7 +817,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>customerReference</td>
 <td>string</td>
-<td>Merchant-provided identifier for the Customer for this transaction.</td>
+<td>Merchant-provided identifier of the Customer for this transaction.</td>
 </tr>
 <tr>
 <td>customerName</td>
@@ -846,7 +842,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>expirationTime</td>
 <td>string ($date-time)</td>
-<td>Pay in expiration time in RFC3339 format. (Timezone UTC+0) Pay in will be expired at expiration time.</td>
+<td>Pay in expiration time in RFC3339 format. (Timezone UTC+0) Pay in will be expired at the expiration time.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -970,7 +966,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>customerReference</td>
 <td>Y</td>
 <td>string</td>
-<td>Merchant-provided identifier for the Customer for this transaction.</td>
+<td>Merchant-provided identifier of the Customer for this transaction.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -1026,12 +1022,12 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>initiatedAmount</td>
 <td>string</td>
-<td>initiatedAmount</td>
+<td>Requested amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>sentAmount</td>
 <td>string</td>
-<td>sentAmount</td>
+<td>Amount sent for this transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -1041,37 +1037,37 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>destinationPayoutMethod</td>
 <td>string</td>
-<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment method for this transaction. (e.g BANK_TRANSFER)</td>
 </tr>
 <tr>
 <td>destinationPayoutChannel</td>
 <td>string</td>
-<td>the payout channel, eg BCA, PERMATA, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment channel for this transaction. (e.g BCA, BRI, DANA, etc)</td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
 <td>string</td>
-<td>the account detail, eg 0412411131 (the bank account, or ewallet account number)</td>
+<td>Account number of destination.</td>
 </tr>
 <tr>
 <td>destinationPayoutAccountName</td>
 <td>string</td>
-<td>the receiver name (bank account/ewallet account)</td>
+<td>Name of account holder as per the bank records. Needs to match the registered account name exactly.</td>
 </tr>
 <tr>
 <td>referenceCode</td>
 <td>string</td>
-<td>your own transaction ID</td>
+<td>Merchant-provided identifier for this transaction. ID</td>
 </tr>
 <tr>
 <td>customerReference</td>
 <td>string</td>
-<td>Merchant-provided identifier for the Customer for this transaction.</td>
+<td>Merchant-provided identifier of the Customer for this transaction.</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>Status of the Pay In. Possible values: [ PENDING, SUCCESS, FAILED ]</td>
+<td>Status of the Pay Out. Possible values: [ PENDING, SUCCESS, FAILED ]</td>
 </tr>
 <tr>
 <td>createdTime</td>
@@ -1081,7 +1077,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>updatedTime</td>
 <td>string ($date-time)</td>
-<td>Pay in updated time in RFC3339 format. (Timezone UTC+0)</td>
+<td>Pay out updated time in RFC3339 format. (Timezone UTC+0)</td>
 </tr>
 <tr>
 <td>description</td>
@@ -1189,12 +1185,12 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>initiatedAmount</td>
 <td>string</td>
-<td>initiatedAmount</td>
+<td>Requested amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>sentAmount</td>
 <td>string</td>
-<td>sentAmount</td>
+<td>Amount sent for this transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -1204,37 +1200,37 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>destinationPayoutMethod</td>
 <td>string</td>
-<td>the payout method, enum [BANK_TRANSFER, EWALLET_TRANSFER]. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment method for this transaction. (e.g BANK_TRANSFER)</td>
 </tr>
 <tr>
 <td>destinationPayoutChannel</td>
 <td>string</td>
-<td>the payout channel, eg BCA, PERMATA, etc. See <a href="#transaction-methods">transaction-methods</a></td>
+<td>Payment channel for this transaction. (e.g BCA, BRI, DANA, etc)</td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
 <td>string</td>
-<td>the account detail, eg 0412411131 (the bank account, or ewallet account number)</td>
+<td>Account number of destination.</td>
 </tr>
 <tr>
 <td>destinationPayoutAccountName</td>
 <td>string</td>
-<td>the receiver name (bank account/ewallet account)</td>
+<td>Name of account holder as per the bank records. Needs to match the registered account name exactly.</td>
 </tr>
 <tr>
 <td>referenceCode</td>
 <td>string</td>
-<td>your own transaction ID</td>
+<td>Merchant-provided identifier for this transaction. ID</td>
 </tr>
 <tr>
 <td>customerReference</td>
 <td>string</td>
-<td>Merchant-provided identifier for the Customer for this transaction.</td>
+<td>Merchant-provided identifier of the Customer for this transaction.</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>Status of the Pay In. Possible values: [ PENDING, SUCCESS, FAILED ]</td>
+<td>Status of the Pay Out. Possible values: [ PENDING, SUCCESS, FAILED ]</td>
 </tr>
 <tr>
 <td>createdTime</td>
@@ -1244,7 +1240,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <tr>
 <td>updatedTime</td>
 <td>string ($date-time)</td>
-<td>Pay in updated time in RFC3339 format. (Timezone UTC+0)</td>
+<td>Pay out updated time in RFC3339 format. (Timezone UTC+0)</td>
 </tr>
 <tr>
 <td>description</td>
@@ -1272,7 +1268,7 @@ You may encounter errors during your requests. The most common errors are listed
 <tr>
 <td>400</td>
 <td>API_VALIDATION_ERROR</td>
-<td>Invalid request errors arise when your request has invalid parameters</td>
+<td>Invalid request errors arise when your request has invalid parameters.</td>
 </tr>
 <tr>
 <td>400</td>
