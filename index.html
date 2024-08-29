@@ -526,12 +526,6 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>Merchant-provided identifier of the Customer for this transaction.</td>
 </tr>
 <tr>
-<td>-</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>customerName</td>
 <td>Y</td>
 <td>string</td>
@@ -564,6 +558,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
@@ -603,6 +598,11 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>paymentAmount</td>
 <td>string</td>
 <td>Payment amount of the transaction in the actual value in the provided currency.</td>
+</tr>
+<tr>
+<td>feeAmount</td>
+<td>string</td>
+<td>Fee amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -745,6 +745,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
@@ -784,6 +785,11 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>paymentAmount</td>
 <td>string</td>
 <td>Payment amount of the transaction in the actual value in the provided currency.</td>
+</tr>
+<tr>
+<td>feeAmount</td>
+<td>string</td>
+<td>Fee amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -993,6 +999,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
@@ -1029,6 +1036,11 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>sentAmount</td>
 <td>string</td>
 <td>Amount sent for this transaction in the actual value in the provided currency.</td>
+</tr>
+<tr>
+<td>feeAmount</td>
+<td>string</td>
+<td>Fee amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -1156,6 +1168,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"destinationPayoutMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
@@ -1192,6 +1205,11 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>sentAmount</td>
 <td>string</td>
 <td>Amount sent for this transaction in the actual value in the provided currency.</td>
+</tr>
+<tr>
+<td>feeAmount</td>
+<td>string</td>
+<td>Fee amount of the transaction in the actual value in the provided currency.</td>
 </tr>
 <tr>
 <td>currency</td>
