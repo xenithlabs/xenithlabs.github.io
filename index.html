@@ -480,7 +480,6 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Debugging-Owner: John Brother Snow 2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
   "initiatedAmount": "100008",
@@ -958,6 +957,12 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>Y</td>
 <td>Sort order of the results (e.g., &quot;asc&quot; or &quot;desc&quot;)</td>
 </tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>N</td>
+<td>Filter Pay Ins by currency (ISO 4217 three-letter code)</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -968,7 +973,6 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Debugging-Owner: John Brother Snow 2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span>
 </code></pre></div><h3 id='http-response-3'>HTTP Response</h3>
 <blockquote>
@@ -1588,6 +1592,12 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <td>Y</td>
 <td>string</td>
 <td>Sort order of the returned records (e.g., &quot;asc&quot; or &quot;desc&quot;)</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>N</td>
+<td>Filter Pay Outs by currency (ISO 4217 three-letter code)</td>
 </tr>
 </tbody></table>
 
