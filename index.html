@@ -356,6 +356,14 @@
               </ul>
           </li>
           <li>
+            <a href="#merchant-balances" class="toc-h1 toc-link" data-title="Merchant Balances">Merchant Balances</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-merchant-balances" class="toc-h2 toc-link" data-title="Get Merchant Balances">Get Merchant Balances</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -1716,6 +1724,90 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 </tbody></table></p></p>
 
 <p>Note: The response will be an array of payout objects wrapped in a <code>data</code> field.</p>
+
+<p><h1 id='merchant-balances'>Merchant Balances</h1><h2 id='get-merchant-balances'>Get Merchant Balances</h2>
+<p>You can use this endpoint to retrieve the available balances for a merchant across different currencies.</p>
+
+<h3 id='http-request'>HTTP Request</h3>
+
+<p><code>GET https://openapi.xenithpay.com/v1/balances</code></p>
+
+<h3 id='request-headers'>Request Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header Name</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Xenith-Api-Key</td>
+<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
+</tr>
+<tr>
+<td>Xenith-Request-Timestamp</td>
+<td><code>2024-05-10T16:42:22.802Z</code> (in <code>RFC3339</code> Format)</td>
+</tr>
+<tr>
+<td>Xenith-Request-Signature</td>
+<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
+</tr>
+</tbody></table>
+
+<h3 id='query-parameters'>Query Parameters</h3>
+
+<p>This endpoint does not require any query parameters.</p></p>
+
+<blockquote>
+<p>Request Example</p>
+</blockquote>
+
+<p><div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">&#39;https://openapi.xenithpay.com/v1/balances&#39;</span> <span class="se">&lt;/span&gt;
+<span class="nt">--header</span> <span class="s1">&#39;Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726&#39;</span> <span class="se">&lt;/span&gt;
+<span class="nt">--header</span> <span class="s1">&#39;Xenith-Request-Timestamp: 2024-05-24T05:16:33.186Z&#39;</span> <span class="se">&lt;/span&gt;
+<span class="nt">--header</span> <span class="s1">&#39;Xenith-Request-Signature: PmOnopSgg5ySiozwlC9kCZ8gFo1TNpw6wrb/SziHsEQ=&#39;</span>
+</code></pre></div><h3 id='http-response'>HTTP Response</h3>
+<blockquote>
+<p>Response Example</p>
+
+<p></blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">&quot;availableBalance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10000.50&quot;</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">&quot;availableBalance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5000.75&quot;</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IDR&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">&quot;availableBalance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15000000.00&quot;</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-fields'>Response Fields</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>ISO 4217 three-letter code of the currency.</td>
+</tr>
+<tr>
+<td>availableBalance</td>
+<td>string</td>
+<td>The available balance in the specified currency as a decimal string.</td>
+</tr>
+</tbody></table></p></p>
+
+<p>Note: The response will be an array of balance objects wrapped in a <code>data</code> field.</p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 You may encounter errors during your requests. The most common errors are listed below. If you come across an error not listed here, please report it to our support team at help@xenithpay.com.
