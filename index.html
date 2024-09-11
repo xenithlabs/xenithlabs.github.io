@@ -359,9 +359,6 @@
                   <li>
                     <a href="#callback-notifications" class="toc-h2 toc-link" data-title="Callback Notifications">Callback Notifications</a>
                   </li>
-                  <li>
-                    <a href="#http-request-4" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -1911,7 +1908,8 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 
 <p>Callback notifications will be sent to the URL specified in the <code>callbackUrl</code> field when creating a Pay Out. These notifications inform you about changes in the transaction status.</p>
 
-<h2 id='http-request-4'>HTTP Request</h2><h3 id='request-headers-4'>Request Headers</h3>
+<h3 id='http-request-4'>HTTP Request</h3><h3 id='request-headers-4'>Request Headers</h3>
+
 <table><thead>
 <tr>
 <th>Header Name</th>
@@ -1937,39 +1935,41 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 </tbody></table>
 
 <p>To validate the <code>X-Callback-Token</code>, you need to generate it on your side and compare it with the received token. There&#39;s an example demonstrating how to generate the token on the side.</p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">crypto</span><span class="dl">'</span><span class="p">);</span>
 
-<span class="kd">function</span> <span class="nx">generateCallbackToken</span><span class="p">(</span><span class="nx">referenceCode</span><span class="p">,</span> <span class="nx">callbackToken</span><span class="p">)</span> <span class="p">{</span>
+<p><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">&#39;</span><span class="s1">crypto</span><span class="dl">&#39;</span><span class="p">);</span></p>
+
+<p><span class="kd">function</span> <span class="nx">generateCallbackToken</span><span class="p">(</span><span class="nx">referenceCode</span><span class="p">,</span> <span class="nx">callbackToken</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">combinedString</span> <span class="o">=</span> <span class="nx">referenceCode</span> <span class="o">+</span> <span class="nx">callbackToken</span><span class="p">;</span>
-  <span class="k">return</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="dl">'</span><span class="s1">sha1</span><span class="dl">'</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">combinedString</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="dl">'</span><span class="s1">hex</span><span class="dl">'</span><span class="p">);</span>
-<span class="p">}</span>
+  <span class="k">return</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="dl">&#39;</span><span class="s1">sha1</span><span class="dl">&#39;</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">combinedString</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="dl">&#39;</span><span class="s1">hex</span><span class="dl">&#39;</span><span class="p">);</span>
+<span class="p">}</span></p>
 
-<span class="c1">// Usage example</span>
-<span class="kd">const</span> <span class="nx">referenceCode</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ref-code-prod-28</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This should be the transaction's reference code</span>
-<span class="kd">const</span> <span class="nx">callbackToken</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">your-secret-callback-token</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This is the secret token provided by Xenith</span>
-<span class="kd">const</span> <span class="nx">generatedToken</span> <span class="o">=</span> <span class="nx">generateCallbackToken</span><span class="p">(</span><span class="nx">referenceCode</span><span class="p">,</span> <span class="nx">callbackToken</span><span class="p">);</span>
+<p><span class="c1">// Usage example</span>
+<span class="kd">const</span> <span class="nx">referenceCode</span> <span class="o">=</span> <span class="dl">&#39;</span><span class="s1">ref-code-prod-28</span><span class="dl">&#39;</span><span class="p">;</span> <span class="c1">// This should be the transaction&#39;s reference code</span>
+<span class="kd">const</span> <span class="nx">callbackToken</span> <span class="o">=</span> <span class="dl">&#39;</span><span class="s1">your-secret-callback-token</span><span class="dl">&#39;</span><span class="p">;</span> <span class="c1">// This is the secret token provided by Xenith</span>
+<span class="kd">const</span> <span class="nx">generatedToken</span> <span class="o">=</span> <span class="nx">generateCallbackToken</span><span class="p">(</span><span class="nx">referenceCode</span><span class="p">,</span> <span class="nx">callbackToken</span><span class="p">);</span></p>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Generated Token:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">generatedToken</span><span class="p">);</span>
+<p><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">&#39;</span><span class="s1">Generated Token:</span><span class="dl">&#39;</span><span class="p">,</span> <span class="nx">generatedToken</span><span class="p">);</span>
 </code></pre></div><h3 id='request-body'>Request Body</h3>
 <blockquote>
 <p>Example</p>
-</blockquote>
+
+<p></blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"schemaVersion"</span><span class="p">:</span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="s2">"2024-09-10T17:20:32.219415433Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
-        </span><span class="nl">"merchantId"</span><span class="p">:</span><span class="s2">"mc-01J6BJBW7DZEGZ4JX67X3356PF"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="s2">"referenceCode002"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionId"</span><span class="p">:</span><span class="s2">"pyout-01J7EF32NM4XAEP3P4YR8ASWW2"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionType"</span><span class="p">:</span><span class="s2">"PAYOUT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionCurrency"</span><span class="p">:</span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionDescription"</span><span class="p">:</span><span class="s2">"Payout testing"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionAmount"</span><span class="p">:</span><span class="s2">"100000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionStatus"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionChannel"</span><span class="p">:</span><span class="s2">"BCA"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionMethod"</span><span class="p">:</span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactionTimestamp"</span><span class="p">:</span><span class="s2">"2024-09-10T17:20:31.952809187Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="s2">"https://spoiled-france-30.webhook.cool"</span><span class="w">
+    </span><span class="nl">&quot;schemaVersion&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2024-09-10T17:20:32.219415433Z&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">&quot;data&quot;</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">&quot;merchantId&quot;</span><span class="p">:</span><span class="s2">&quot;mc-01J6BJBW7DZEGZ4JX67X3356PF&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;referenceCode&quot;</span><span class="p">:</span><span class="s2">&quot;referenceCode002&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionId&quot;</span><span class="p">:</span><span class="s2">&quot;pyout-01J7EF32NM4XAEP3P4YR8ASWW2&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionType&quot;</span><span class="p">:</span><span class="s2">&quot;PAYOUT&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionCurrency&quot;</span><span class="p">:</span><span class="s2">&quot;IDR&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionDescription&quot;</span><span class="p">:</span><span class="s2">&quot;Payout testing&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionAmount&quot;</span><span class="p">:</span><span class="s2">&quot;100000&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionStatus&quot;</span><span class="p">:</span><span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionChannel&quot;</span><span class="p">:</span><span class="s2">&quot;BCA&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionMethod&quot;</span><span class="p">:</span><span class="s2">&quot;BANK_TRANSFER&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;transactionTimestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2024-09-10T17:20:31.952809187Z&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="nl">&quot;callbackUrl&quot;</span><span class="p">:</span><span class="s2">&quot;https://spoiled-france-30.webhook.cool&quot;</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='body-parameters-2'>Body Parameters</h3>
@@ -2062,10 +2062,9 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <li><p>If your server responds with a 5xx status code, we will retry sending the callback.</p></li>
 <li><p>Validate the callback by comparing the X-Callback-Token in the header with your generated token.</p></li>
 <li><p>If the token is valid, process the callback data and update your system accordingly.</p></li>
-</ol>
+</ol></p></p>
 
-<h1 id='balances'>Balances</h1><h2 id='get-balances'>Get Balances</h2>
-
+<p><h1 id='balances'>Balances</h1><h2 id='get-balances'>Get Balances</h2>
 <p>You can use this endpoint to retrieve your available balances across different currencies.</p>
 
 <h3 id='http-request'>HTTP Request</h3>
@@ -2096,7 +2095,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 
 <h3 id='query-parameters'>Query Parameters</h3>
 
-<p>This endpoint does not require any query parameters.</p>
+<p>This endpoint does not require any query parameters.</p></p>
 
 <blockquote>
 <p>Request Example</p>
