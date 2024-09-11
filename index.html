@@ -342,9 +342,6 @@
                   <li>
                     <a href="#callback-notifications" class="toc-h2 toc-link" data-title="Callback Notifications">Callback Notifications</a>
                   </li>
-                  <li>
-                    <a href="#http-request-4" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -1126,9 +1123,10 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 
 <h2 id='callback-notifications'>Callback Notifications</h2>
 
-<p>We send callback notifications to the URL specified in the <code>callbackUrl</code> field when creating a Pay In. These notifications inform you about changes in the transaction status.</p>
+<p>Callback notifications will be sent to the URL specified in the <code>callbackUrl</code> field when creating a Pay In. These notifications inform you about changes in the transaction status.</p>
 
-<h2 id='http-request-4'>HTTP Request</h2><h3 id='request-headers-4'>Request Headers</h3>
+<h3 id='http-request-4'>HTTP Request</h3><h3 id='request-headers-4'>Request Headers</h3>
+
 <table><thead>
 <tr>
 <th>Header Name</th>
@@ -1154,6 +1152,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 </tbody></table>
 
 <p>To validate the X-Callback-Token, you need to generate it on your side and compare it with the received token. Here&#39;s a Node.js example demonstrating how to generate the token:</p>
+
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">crypto</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="kd">function</span> <span class="nx">generateCallbackToken</span><span class="p">(</span><span class="nx">referenceCode</span><span class="p">,</span> <span class="nx">callbackToken</span><span class="p">)</span> <span class="p">{</span>
@@ -1291,19 +1290,13 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <li><p>If your server responds with a 5xx status code, we will retry sending the callback.</p></li>
 <li><p>Validate the callback by comparing the X-Callback-Token in the header with your generated token.</p></li>
 <li><p>If the token is valid, process the callback data and update your system accordingly.</p></li>
-<li><p>Ensure your processing is idempotent to handle potential duplicate callbacks.</p></li>
 </ol>
 
 <h1 id='pay-out'>Pay Out</h1><h2 id='create-pay-out-request'>Create Pay Out Request</h2>
-
 <p>You can use this end point to create a Pay out request. </p>
-
 <h3 id='http-request'>HTTP Request</h3>
-
 <p><code>POST https://openapi.xenithpay.com/v1/payouts</code></p>
-
 <h3 id='request-headers'>Request Headers</h3>
-
 <table><thead>
 <tr>
 <th>Header Name</th>
@@ -1327,7 +1320,6 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <blockquote>
 <p>Request Example</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/payouts'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
@@ -1917,7 +1909,7 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 
 <h2 id='callback-notifications'>Callback Notifications</h2>
 
-<p>We send callback notifications to the URL specified in the <code>callbackUrl</code> field when creating a Pay Out. These notifications inform you about changes in the transaction status.</p>
+<p>Callback notifications will be sent to the URL specified in the <code>callbackUrl</code> field when creating a Pay Out. These notifications inform you about changes in the transaction status.</p>
 
 <h2 id='http-request-4'>HTTP Request</h2><h3 id='request-headers-4'>Request Headers</h3>
 <table><thead>
