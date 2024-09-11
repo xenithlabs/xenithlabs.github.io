@@ -1161,8 +1161,8 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <span class="p">}</span>
 
 <span class="c1">// Usage example</span>
-<span class="kd">const</span> <span class="nx">referenceCode</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ref-code-prod-28</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This should be the referenceCode from the webhook payload</span>
-<span class="kd">const</span> <span class="nx">callbackToken</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">your-secret-callback-token</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This is the secret token provided by Xenith Pay</span>
+<span class="kd">const</span> <span class="nx">referenceCode</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ref-code-prod-28</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This should be the transaction's reference code</span>
+<span class="kd">const</span> <span class="nx">callbackToken</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">your-secret-callback-token</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This is the secret token provided by Xenith</span>
 <span class="kd">const</span> <span class="nx">generatedToken</span> <span class="o">=</span> <span class="nx">generateCallbackToken</span><span class="p">(</span><span class="nx">referenceCode</span><span class="p">,</span> <span class="nx">callbackToken</span><span class="p">);</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Generated Token:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">generatedToken</span><span class="p">);</span>
@@ -1945,8 +1945,8 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 <span class="p">}</span>
 
 <span class="c1">// Usage example</span>
-<span class="kd">const</span> <span class="nx">referenceCode</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ref-code-prod-28</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This should be the referenceCode from the webhook payload</span>
-<span class="kd">const</span> <span class="nx">callbackToken</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">your-secret-callback-token</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This is the secret token provided by Xenith Pay</span>
+<span class="kd">const</span> <span class="nx">referenceCode</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ref-code-prod-28</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This should be the transaction's reference code</span>
+<span class="kd">const</span> <span class="nx">callbackToken</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">your-secret-callback-token</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// This is the secret token provided by Xenith</span>
 <span class="kd">const</span> <span class="nx">generatedToken</span> <span class="o">=</span> <span class="nx">generateCallbackToken</span><span class="p">(</span><span class="nx">referenceCode</span><span class="p">,</span> <span class="nx">callbackToken</span><span class="p">);</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Generated Token:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">generatedToken</span><span class="p">);</span>
