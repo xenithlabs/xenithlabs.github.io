@@ -423,7 +423,7 @@
 
 <blockquote>
 <p>Example of Secret Key &amp; Access Key
-<code>sh
+<code>shell
 Secret key: sk-760a8a0c8826b2e9dd8fe3ed0c66976f0c3d4a0443056674b7c132a25ddbbaf6eed1a410e02609a0a9791d7683c5de83860574bf6a92ddf8ea5a14360a96ac3c
 Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 </code></p>
@@ -431,28 +431,35 @@ Access Key: ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c
 
 <h3 id='build-signature'>Build Signature</h3>
 
-<p>This section explains how to generate a signature to authenticate requests when calling Zenith&#39;s APIs. Each request to the API must include a signature, which is created using the provided secret key, HTTP method, URI, and timestamp.
+<p>This section explains how to generate a signature to authenticate requests when calling Zenith&#39;s APIs. Each request to the API must include a signature, which is created using the provided secret key, HTTP method, URI, and timestamp.</p>
+
 <ol>
-  <li><strong>Get the current timestamp</strong>: Generate the current timestamp in RFC3339 format (UTC). Example:
-    <pre><code>var timestamp = new Date().toISOString();</code></pre>
-  </li>
-  <li><strong>Retrieve the request method and URI</strong>: Capture the HTTP method (e.g., GET, POST) and the request URI. Example:
-    <pre><code>var method = pm.request.method;
-var uri = pm.request.url.getPathWithQuery();</code></pre>
-  </li>
-  <li><strong>Concatenate the method, URI, and timestamp</strong>: Combine these values, separated by newlines (<code>\n</code>), to create the signature payload.
-    <pre><code>var signaturePayload = method + &quot;\n&quot; + uri + &quot;\n&quot; + timestamp;</code></pre>
-  </li>
-  <li><strong>Generate the signature</strong>: Use your secret key to create an HMAC SHA256 hash of the payload, then encode the hash in base64.
-    <pre><code>var hash = CryptoJS.HmacSHA256(signaturePayload, secretKey);
-var signature = CryptoJS.enc.Base64.stringify(hash);</code></pre>
-  </li>
-  <li><strong>Set the signature and timestamp</strong>: Save the generated signature and timestamp as environment variables for use in the request headers.
-    <pre><code>pm.environment.set(&quot;request_timestamp&quot;, timestamp);
-pm.environment.set(&quot;request_signature&quot;, signature);</code></pre>
-  </li>
+<li><p><strong>Get the current timestamp</strong>: Generate the current timestamp in RFC3339 format (UTC). Example:
+<code>javascript
+var timestamp = new Date().toISOString();
+</code></p></li>
+<li><p><strong>Retrieve the request method and URI</strong>: Capture the HTTP method (e.g., GET, POST) and the request URI. Example:
+<code>javascript
+var method = pm.request.method;
+var uri = pm.request.url.getPathWithQuery();
+</code></p></li>
+<li><p><strong>Concatenate the method, URI, and timestamp</strong>: Combine these values, separated by newlines (<code>\n</code>), to create the signature payload.
+<code>javascript
+var signaturePayload = method + &quot;\n&quot; + uri + &quot;\n&quot; + timestamp;
+</code></p></li>
+<li><p><strong>Generate the signature</strong>: Use your secret key to create an HMAC SHA256 hash of the payload, then encode the hash in base64.
+<code>javascript
+var hash = CryptoJS.HmacSHA256(signaturePayload, secretKey);
+var signature = CryptoJS.enc.Base64.stringify(hash);
+</code></p></li>
+<li><p><strong>Set the signature and timestamp</strong>: Save the generated signature and timestamp as environment variables for use in the request headers.
+<code>javascript
+pm.environment.set(&quot;request_timestamp&quot;, timestamp);
+pm.environment.set(&quot;request_signature&quot;, signature);
+</code></p></li>
 </ol>
-Now finally, add the signature to every request header when calling the API for Zenith.</p>
+
+<p>Now finally, add the signature to every request header when calling the API for Zenith.</p>
 
 <p><h1 id='pay-in'>Pay In</h1><h2 id='create-pay-in-request'>Create Pay In Request</h2>
 <p>You can use this end point to create a Pay In request.</p>
