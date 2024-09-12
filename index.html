@@ -323,9 +323,6 @@
                     <a href="#example-of-secret-key-and-access-key" class="toc-h2 toc-link" data-title="Example of Secret Key and Access Key">Example of Secret Key and Access Key</a>
                   </li>
                   <li>
-                    <a href="#request-header-parameters" class="toc-h2 toc-link" data-title="Request Header Parameters">Request Header Parameters</a>
-                  </li>
-                  <li>
                     <a href="#build-signature" class="toc-h2 toc-link" data-title="Build Signature">Build Signature</a>
                   </li>
               </ul>
@@ -427,31 +424,23 @@
 </tr>
 </tbody></table>
 
-<h3 id='request-header-parameters'>Request Header Parameters</h3>
+<!-- ### Request Header Parameters -->
 
-<table><thead>
-<tr>
-<th>Header Name</th>
-<th>Example Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Content-Type</td>
-<td>Specifies the format of the request body (JSON).</td>
-</tr>
-<tr>
-<td>Xenith-Api-Key</td>
-<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (use Access Key)</td>
-</tr>
-<tr>
-<td>Xenith-Request-Timestamp</td>
-<td><code>2024-05-10T16:42:22.802Z</code> in RFC3339 format (UTC+0).</td>
-</tr>
-<tr>
-<td>Xenith-Request-Signature</td>
-<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (see <a href="#build-signature">Build Signature</a> to see how to build signature)</td>
-</tr>
-</tbody></table>
+<!---->
+
+<!-- | Header Name              | Example Value                                                                                                          | -->
+
+<!-- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -->
+
+<!-- | Content-Type             | Specifies the format of the request body (JSON).                                                                       | -->
+
+<!-- | Xenith-Api-Key           | `ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c` (use Access Key)                                 | -->
+
+<!-- | Xenith-Request-Timestamp | `2024-05-10T16:42:22.802Z` in RFC3339 format (UTC+0).                                                                  | -->
+
+<!-- | Xenith-Request-Signature | `TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=` (see [Build Signature](#build-signature) to see how to build signature) | -->
+
+<!---->
 
 <h3 id='build-signature'>Build Signature</h3>
 
