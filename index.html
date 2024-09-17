@@ -323,13 +323,28 @@
                     <a href="#example-of-secret-key-and-access-key" class="toc-h2 toc-link" data-title="Example of Secret Key and Access Key">Example of Secret Key and Access Key</a>
                   </li>
                   <li>
-                    <a href="#build-signature" class="toc-h2 toc-link" data-title="Build Signature">Build Signature</a>
+                    <a href="#build-signature-and-set-headers" class="toc-h2 toc-link" data-title="Build Signature and Set Headers">Build Signature and Set Headers</a>
+                  </li>
+                  <li>
+                    <a href="#best-practices" class="toc-h2 toc-link" data-title="Best Practices">Best Practices</a>
+                  </li>
+                  <li>
+                    <a href="#troubleshooting" class="toc-h2 toc-link" data-title="Troubleshooting">Troubleshooting</a>
                   </li>
               </ul>
           </li>
           <li>
             <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#common-webhook-structure" class="toc-h2 toc-link" data-title="Common Webhook Structure">Common Webhook Structure</a>
+                  </li>
+                  <li>
+                    <a href="#transaction-specific-webhook-formats" class="toc-h2 toc-link" data-title="Transaction-Specific Webhook Formats">Transaction-Specific Webhook Formats</a>
+                  </li>
+                  <li>
+                    <a href="#webhook-response" class="toc-h2 toc-link" data-title="Webhook Response">Webhook Response</a>
+                  </li>
                   <li>
                     <a href="#check-webhook-signature" class="toc-h2 toc-link" data-title="Check Webhook Signature">Check Webhook Signature</a>
                   </li>
@@ -413,7 +428,7 @@
 
 <h1 id='authentication'>Authentication</h1>
 
-<p>To successfully authenticate with Xenithpay’s APIs, you will need to obtain your Access Key &amp; Secret Key from the Dashboard. Your keys should be kept private so do not share your keys.</p>
+<p>To successfully authenticate with Xenithpay&#39;s APIs, you will need to obtain your Access Key &amp; Secret Key from the Dashboard. Your keys should be kept private so do not share your keys.</p>
 
 <h3 id='example-of-secret-key-and-access-key'>Example of Secret Key and Access Key</h3>
 
@@ -433,27 +448,9 @@
 </tr>
 </tbody></table>
 
-<!-- ### Request Header Parameters -->
+<h3 id='build-signature-and-set-headers'>Build Signature and Set Headers</h3>
 
-<!---->
-
-<!-- | Header Name              | Example Value                                                                                                          | -->
-
-<!-- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -->
-
-<!-- | Content-Type             | Specifies the format of the request body (JSON).                                                                       | -->
-
-<!-- | Xenith-Api-Key           | `ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c` (use Access Key)                                 | -->
-
-<!-- | Xenith-Request-Timestamp | `2024-05-10T16:42:22.802Z` in RFC3339 format (UTC+0).                                                                  | -->
-
-<!-- | Xenith-Request-Signature | `TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=` (see [Build Signature](#build-signature) to see how to build signature) | -->
-
-<!---->
-
-<h3 id='build-signature'>Build Signature</h3>
-
-<p>This section explains how to generate a signature to authenticate requests when calling Zenith&#39;s APIs. Each request to the API must include a signature, which is created using the provided secret key, HTTP method, URI, and timestamp.</p>
+<p>This section explains how to generate a signature and set the required headers for authenticating requests to Xenith&#39;s APIs.</p>
 
 <ol>
   <li><strong>Get the current timestamp</strong>: Generate the current timestamp in RFC3339 format (UTC). Example:
@@ -470,60 +467,52 @@ var uri = pm.request.url.getPathWithQuery();</code></pre>
     <pre class="inline-code"><code>var hash = CryptoJS.HmacSHA256(signaturePayload, secretKey);
 var signature = CryptoJS.enc.Base64.stringify(hash);</code></pre>
   </li>
-  <li><strong>Set the signature and timestamp</strong>: Save the generated signature and timestamp as environment variables for use in the request headers.
-    <pre class="inline-code"><code>pm.environment.set("request_timestamp", timestamp);
-pm.environment.set("request_signature", signature);</code></pre>
+  <li><strong>Set the required headers</strong>: Use the generated signature, timestamp, and your Access Key to set the following headers:
+    <pre class="inline-code"><code>pm.request.headers.add({ key: "Xenith-Api-Key", value: yourAccessKey });
+pm.request.headers.add({ key: "Xenith-Request-Signature", value: signature });
+pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</code></pre>
   </li>
 </ol>
 
-<p>Now finally, add the signature to every request header when calling the API for Zenith.</p>
+<h3 id='best-practices'>Best Practices</h3>
+
+<ol>
+<li>Generate a new signature for each API request to ensure security.</li>
+<li>Always use HTTPS for API requests to protect data in transit.</li>
+<li>Implement proper error handling for authentication failures.</li>
+<li>Regularly rotate your Access and Secret keys as part of your security practice.</li>
+<li>Never share your Secret Key or include it in client-side code.</li>
+</ol>
+
+<h3 id='troubleshooting'>Troubleshooting</h3>
+
+<p>If you encounter authentication errors:</p>
+
+<ol>
+<li>Verify that your Access Key and Secret Key are correct and active.</li>
+<li>Ensure your system clock is accurately synchronized with a reliable time server.</li>
+<li>Double-check that all required headers are included and correctly formatted.</li>
+<li>Verify that the signature is being generated correctly for each request.</li>
+</ol>
+
+<p>For persistent issues, contact Xenithpay support with your Access Key and the problematic request details (excluding your Secret Key).</p>
 
 <h1 id='webhooks'>Webhooks</h1>
 
-<p>Xenith uses webhooks to notify your application whenever an event occurs on your account. You can set up webhooks for events that Xenith doesn’t automatically notify you about, such as when a Pay In is successful, expired, or failed, and when a Pay Out is successful or failed.</p>
+<p>Xenith uses webhooks to notify your application whenever an event occurs on your account. You can set up webhooks for events that Xenith doesn&#39;t automatically notify you about, such as when a Pay In is successful, expired, or failed, and when a Pay Out is successful or failed.</p>
 
-<p>Webhooks are HTTP callbacks sent to an endpoint on your server. Xenith requires you to use HTTPS endpoints with TLSv1.2 or TLSv1.3 for secure communication.</p>
+<h3 id='common-webhook-structure'>Common Webhook Structure</h3>
 
-<h2 id='check-webhook-signature'>Check Webhook Signature</h2>
-
-<p>Xenith signs all webhook events by including a signature in the request headers. This allows you to verify that the events were sent by Xenith. Follow these steps to verify the signature:</p>
-
-<ol>
-  <li>Extract the <strong>X-Signature</strong> from the request header.</li>
-  <li>Compute an <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code"><strong>HMAC</strong></a> using the <a href="https://en.wikipedia.org/wiki/SHA-2"><strong>SHA-256</strong></a> hash function with the <strong>x-signature</strong> and the raw JSON payload.</li>
-  <li>Compare the <strong>X-Signature</strong> from the header with your computed signature. If they match, check the difference between the current timestamp and the received timestamp to ensure it falls within your allowed tolerance.</li>
-</ol>
-
-<p>When generating the expected signature, ensure you&#39;re using the raw, unmodified JSON payload.</p>
-
-<p><strong>Note:</strong> Many libraries format the JSON when parsing it, so it&#39;s best to verify the signature before any transformation occurs.</p>
-
-<blockquote>
-<p>Request Example</p>
-</blockquote>
+<p>All webhooks share a common structure:</p>
 
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0001-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-02T11:33:20.069Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"merchantId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"merchant-id"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reference-code"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transaction-id"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transaction-type"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"currency"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"description"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"status"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"method"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionMethodIdentifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"identifier"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionAssociatedName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"associated-name"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactionTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0001-01-01T00:00:00Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"callbackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/v8/send/the/callback/here"</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">Transaction-specific</span><span class="w"> </span><span class="err">data</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='request-parameters'>Request Parameters</h3>
-<p>The response will be an array of balance objects wrapped in a <code>data</code> field.</p>
+</span></code></pre></div>
 
 <table><thead>
 <tr>
@@ -533,77 +522,51 @@ pm.environment.set("request_signature", signature);</code></pre>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>merchantId</code></td>
+<td><code>schemaVersion</code></td>
 <td>string</td>
-<td>Merchant ID</td>
+<td>Version of the webhook schema</td>
 </tr>
 <tr>
-<td><code>referenceCode</code></td>
+<td><code>timestamp</code></td>
 <td>string</td>
-<td>Reference Code</td>
+<td>Timestamp of the webhook event (UTC, ISO 8601 format)</td>
 </tr>
 <tr>
-<td><code>transactionId</code></td>
-<td>string</td>
-<td>Transaction ID</td>
-</tr>
-<tr>
-<td><code>transactionType</code></td>
-<td>string</td>
-<td>Transaction Type</td>
-</tr>
-<tr>
-<td><code>transactionCurrency</code></td>
-<td>string</td>
-<td>Currency</td>
-</tr>
-<tr>
-<td><code>transactionDescription</code></td>
-<td>string</td>
-<td>Description</td>
-</tr>
-<tr>
-<td><code>transactionAmount</code></td>
-<td>string</td>
-<td>Amount</td>
-</tr>
-<tr>
-<td><code>transactionStatus</code></td>
-<td>string</td>
-<td>Status</td>
-</tr>
-<tr>
-<td><code>transactionChannel</code></td>
-<td>string</td>
-<td>Channel</td>
-</tr>
-<tr>
-<td><code>transactionMethod</code></td>
-<td>string</td>
-<td>Method</td>
-</tr>
-<tr>
-<td><code>transactionMethodIdentifier</code></td>
-<td>string</td>
-<td>Identifier</td>
-</tr>
-<tr>
-<td><code>transactionAssociatedName</code></td>
-<td>string</td>
-<td>Associated Name</td>
-</tr>
-<tr>
-<td><code>transactionTimestamp</code></td>
-<td>string</td>
-<td>Transaction Timestamp</td>
-</tr>
-<tr>
-<td><code>callbackUrl</code></td>
-<td>string</td>
-<td>Callback URL</td>
+<td><code>data</code></td>
+<td>object</td>
+<td>Contains transaction-specific details</td>
 </tr>
 </tbody></table>
+
+<h3 id='transaction-specific-webhook-formats'>Transaction-Specific Webhook Formats</h3>
+
+<p>For details on the specific webhook formats, please refer to the following sections:</p>
+
+<ul>
+<li><a href="../payout/_payout.html.md#pay-out-webhook">Pay Out Webhook</a></li>
+<li><a href="../payins/_payins.html.md#pay-in-webhook">Pay In Webhook</a></li>
+</ul>
+
+<h3 id='webhook-response'>Webhook Response</h3>
+
+<p>Your system should immediately respond with a 200 status code upon receiving a webhook. If a failure occurs, automatic retry will kick-off for the next 24 hours. Refer to the <a href="#delivery-attempts-and-retries">Delivery Attempts and Retries</a> section for more details.</p>
+
+<h2 id='check-webhook-signature'>Check Webhook Signature</h2>
+
+<p>Xenith signs all webhook events by including a signature in the request headers. This allows you to verify that the events were sent by Xenith. Follow these steps to verify the signature:</p>
+
+<ol>
+  <li>Extract the <strong>X-Signature</strong> from the request header.</li>
+  <li>Extract the <strong>timestamp</strong> from the request body.</li>
+  <li>Concatenate the HTTP method, full URL (including query parameters if any), and timestamp, separated by newlines (<code>\n</code>).</li>
+  <li>Compute an <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code"><strong>HMAC</strong></a> using the <a href="https://en.wikipedia.org/wiki/SHA-2"><strong>SHA-256</strong></a> hash function. Use your webhook secret as the key and the concatenated string as the message.</li>
+  <li>Encode the resulting hash using Base64.</li>
+  <li>Compare the computed signature with the <strong>X-Signature</strong> from the header. If they match, the webhook is verified.</li>
+  <li>Optionally, check if the timestamp is within an acceptable time range to prevent replay attacks.</li>
+</ol>
+
 <h3 id='request-header-parameters'>Request Header Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Header Name</th>
@@ -623,7 +586,11 @@ pm.environment.set("request_signature", signature);</code></pre>
 <td><a href="#webhook-signature-example">Computed Signature</a></td>
 </tr>
 </tbody></table>
-<h3 id='webhook-signature-example'>Webhook signature example</h3>
+
+<h3 id='webhook-signature-example'>Webhook Signature Example</h3>
+
+<p>Here&#39;s how to generate and verify the webhook signature:</p>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -632,26 +599,55 @@ pm.environment.set("request_signature", signature);</code></pre>
 </thead><tbody>
 <tr>
 <td>Timestamp</td>
-<td><code>2024-09-17 15:39:00 +0000 UTC</code> (Will be always UTC)</td>
+<td><code>2024-09-17T15:39:00Z</code> (From request body, always in UTC)</td>
 </tr>
 <tr>
 <td>HTTP Method</td>
 <td><code>POST</code></td>
 </tr>
 <tr>
+<td>URL</td>
+<td><code>https://example.com/webhook?param=value</code></td>
+</tr>
+<tr>
 <td>Secret</td>
 <td><code>c238eaeb9561e104d6712f21bc0552818dcf3290a351103e4aba575df2a8c951</code></td>
 </tr>
-<tr>
-<td>Callback URL</td>
-<td><code>https://example.com/v8/send/the/callback/here</code></td>
-</tr>
 </tbody></table>
 
-<p>Will generate this signature:
-<code>
-UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0xN1QxNTozOTowMFpS0gUj2iAg9PKzDSi1ksqitpLfIlHk8LxDzodMG+ePcA==
-</code></p>
+<p>Signature generation and verification process:</p>
+
+<ol>
+<li>Concatenate the following values, separated by newlines (<code>\n</code>):
+
+<ul>
+<li>HTTP method (uppercase)</li>
+<li>Full URL (including query parameters if any)</li>
+<li>Timestamp from the request body</li>
+</ul></li>
+</ol>
+
+<p>Example: <code>POST\nhttps://example.com/webhook?param=value\n2024-09-17T15:39:00Z</code></p>
+
+<ol>
+<li><p>Create an HMAC-SHA256 hash:</p>
+
+<ul>
+<li>Use the concatenated string as the message</li>
+<li>Use your webhook secret as the key</li>
+</ul></li>
+<li><p>Encode the resulting hash in Base64. This is your signature.</p></li>
+<li><p>To verify:</p>
+
+<ul>
+<li>Generate the signature using steps 1-3</li>
+<li>Compare the generated signature with the <code>X-Signature</code> header from the webhook request</li>
+<li>Ensure the timestamp in the request body is within an acceptable time range to prevent replay attacks</li>
+</ul></li>
+</ol>
+
+<p>Note: The actual signature will vary based on your specific inputs. Always use the full URL, including any query parameters, when generating or verifying the signature. The secret used for signature verification should be securely stored on your server and not transmitted with the webhook payload.</p>
+
 <h2 id='webhook-security-requirements'>Webhook Security Requirements</h2><h3 id='tls-version'>TLS Version</h3>
 <ul>
 <li>The server receiving webhooks from our system must support TLS 1.2 or above.</li>
@@ -699,6 +695,7 @@ UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0x
 
 <p>By adhering to these requirements, you ensure that the webhook communication between our system and your server maintains a high level of security and data integrity.</p>
 <h2 id='delivery-attempts-and-retries'>Delivery Attempts and Retries</h2>
+
 <p>Xenith attempts to deliver your webhook eleven times with exponential backoff between each interval. We will stop retrying after receiving a response from your server or if there is still no response after the final attempt.</p>
 
 <table><thead>
@@ -753,11 +750,15 @@ UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0x
 </tr>
 </tbody></table>
 
-<h1 id='pay-in'>Pay In</h1><h2 id='create-pay-in-request'>Create Pay In Request</h2>
+<p><h1 id='pay-in'>Pay In</h1><h2 id='create-pay-in-request'>Create Pay In Request</h2>
 <p>You can use this end point to create a Pay In request.</p>
+
 <h3 id='endpoint'>Endpoint</h3>
+
 <p><code>POST https://openapi.xenithpay.com/v1/payins</code></p>
+
 <h3 id='request-header-parameters'>Request Header Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Header Name</th>
@@ -780,11 +781,12 @@ UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0x
 <td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature">here</a> for instructions on how to build a signature.</td>
 </tr>
-</tbody></table>
+</tbody></table></p>
 
 <blockquote>
 <p>Request Example</p>
 </blockquote>
+
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/payins'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
@@ -872,10 +874,13 @@ UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0x
 <td>URL where the end-customer is redirected to after the transaction is completed.</td>
 </tr>
 </tbody></table>
+
 <h3 id='response-parameters'>Response Parameters</h3>
+
 <blockquote>
 <p>Response Example</p>
 </blockquote>
+
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
