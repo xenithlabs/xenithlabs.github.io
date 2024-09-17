@@ -353,9 +353,6 @@
                   <li>
                     <a href="#pay-in-webhook" class="toc-h2 toc-link" data-title="Pay In Webhook">Pay In Webhook</a>
                   </li>
-                  <li>
-                    <a href="#simulate-transaction" class="toc-h2 toc-link" data-title="Simulate Transaction">Simulate Transaction</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -372,9 +369,6 @@
                   </li>
                   <li>
                     <a href="#pay-out-webhook" class="toc-h2 toc-link" data-title="Pay Out Webhook">Pay Out Webhook</a>
-                  </li>
-                  <li>
-                    <a href="#simulate-payout-transaction-status" class="toc-h2 toc-link" data-title="Simulate Payout Transaction Status">Simulate Payout Transaction Status</a>
                   </li>
               </ul>
           </li>
@@ -1308,130 +1302,12 @@ pm.environment.set("request_signature", signature);</code></pre>
 </tbody></table>
 <h3 id='failure-codes'>Failure Codes</h3>
 <p>List of failure codes can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1ZUyCCedunqpLK4OWiUkH9N1E__DiW0Zz0REruy-osaQ/edit?usp=sharing">here</a>.</p>
-<h2 id='simulate-transaction'>Simulate Transaction</h2>
-<p>You can use this endpoint to simulate a transaction status change for testing purposes.</p>
-<h3 id='endpoint-4'>Endpoint</h3>
-<p><code>POST https://openapi.xenithpay.com/v1/simulator/transaction</code></p>
-<h3 id='request-header-parameters-5'>Request Header Parameters</h3>
-<table><thead>
-<tr>
-<th>Header Name</th>
-<th>Example Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Content-Type</td>
-<td>Specifies the format of the request body (JSON).</td>
-</tr>
-<tr>
-<td>Xenith-Api-Key</td>
-<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (Access Key)</td>
-</tr>
-<tr>
-<td>Xenith-Request-Timestamp</td>
-<td><code>2024-05-10T16:42:22.802Z</code> in RFC3339 format (UTC+0).</td>
-</tr>
-<tr>
-<td>Xenith-Request-Signature</td>
-<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature">here</a> for instructions on how to build a signature.</td>
-</tr>
-</tbody></table>
-<h3 id='request-body-parameters-5'>Request Body Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>transactionId</td>
-<td>Y</td>
-<td>string</td>
-<td>Unique identifier for the transaction to be simulated.</td>
-</tr>
-<tr>
-<td>transactionCategory</td>
-<td>Y</td>
-<td>string</td>
-<td>Category of the transaction. Must be either &quot;PAYMENT&quot; or &quot;PAYOUT&quot;.</td>
-</tr>
-<tr>
-<td>transactionStatus</td>
-<td>Y</td>
-<td>string</td>
-<td>Simulated status of the transaction. Must be &quot;SUCCESS&quot;, &quot;FAILED&quot;, or &quot;EXPIRED&quot;.</td>
-</tr>
-</tbody></table>
 
-<blockquote>
-<p>Request Example</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/simulator/transaction'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--data</span> <span class="s1">'{
-  "transactionId": "ptm-01HWZJMV1S387KCWPM1S18RZ7A",
-  "transactionCategory": "PAYMENT",
-  "transactionStatus": "SUCCESS"
-}'</span>
-</code></pre></div>
-
-<p>Note: The &quot;EXPIRED&quot; status is only applicable for Payment transactions.</p>
-
-<h3 id='response-parameters-4'>Response Parameters</h3>
-
-<blockquote>
-<p>Response Example</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction webhook simulator success"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>message</td>
-<td>string</td>
-<td>Confirmation message for the simulated action.</td>
-</tr>
-</tbody></table>
-
-<h3 id='response-codes'>Response Codes</h3>
-
-<table><thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>Simulation successful</td>
-</tr>
-</tbody></table>
-
-<p>Note: This endpoint is for testing purposes only.</p>
-
-<p><h1 id='pay-out'>Pay Out</h1><h2 id='create-pay-out-request'>Create Pay Out Request</h2>
+<h1 id='pay-out'>Pay Out</h1><h2 id='create-pay-out-request'>Create Pay Out Request</h2>
 <p>You can use this end point to create a Pay out request.</p>
-
 <h3 id='endpoint'>Endpoint</h3>
-
 <p><code>POST https://openapi.xenithpay.com/v1/payouts</code></p>
-
 <h3 id='request-header-parameters'>Request Header Parameters</h3>
-
 <table><thead>
 <tr>
 <th>Header Name</th>
@@ -1454,12 +1330,11 @@ pm.environment.set("request_signature", signature);</code></pre>
 <td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature">here</a> for instructions on how to build a signature.</td>
 </tr>
-</tbody></table></p>
+</tbody></table>
 
 <blockquote>
 <p>Request Example</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/payouts'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
@@ -1547,13 +1422,10 @@ pm.environment.set("request_signature", signature);</code></pre>
 <td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 </tbody></table>
-
 <h3 id='response-parameters'>Response Parameters</h3>
-
 <blockquote>
 <p>Response Example</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
@@ -2122,126 +1994,15 @@ pm.environment.set("request_signature", signature);</code></pre>
 </tbody></table>
 <h3 id='failure-codes'>Failure Codes</h3>
 <p>List of failure codes can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1ZUyCCedunqpLK4OWiUkH9N1E__DiW0Zz0REruy-osaQ/edit?usp=sharing">here</a>.</p>
-<h2 id='simulate-payout-transaction-status'>Simulate Payout Transaction Status</h2>
-<p>You can use this endpoint to simulate a payout transaction status change for testing purposes.</p>
-<h3 id='endpoint-4'>Endpoint</h3>
-<p><code>POST https://openapi.xenithpay.com/v1/simulator/transaction</code></p>
-<h3 id='request-header-parameters-4'>Request Header Parameters</h3>
-<table><thead>
-<tr>
-<th>Header Name</th>
-<th>Example Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Content-Type</td>
-<td>Specifies the format of the request body (JSON).</td>
-</tr>
-<tr>
-<td>Xenith-Api-Key</td>
-<td><code>ak-89f0cdb50f4b31aa08c4727a0c02e5e32dedd6b1cb362df708c8ac3dcf36d25c</code> (Access Key)</td>
-</tr>
-<tr>
-<td>Xenith-Request-Timestamp</td>
-<td><code>2024-05-10T16:42:22.802Z</code> in RFC3339 format (UTC+0).</td>
-</tr>
-<tr>
-<td>Xenith-Request-Signature</td>
-<td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature">here</a> for instructions on how to build a signature.</td>
-</tr>
-</tbody></table>
-<h3 id='request-body-parameters-5'>Request Body Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>transactionId</td>
-<td>Y</td>
-<td>string</td>
-<td>Unique identifier for the transaction to be simulated.</td>
-</tr>
-<tr>
-<td>transactionCategory</td>
-<td>Y</td>
-<td>string</td>
-<td>Category of the transaction. Must be &quot;PAYOUT&quot; for this endpoint.</td>
-</tr>
-<tr>
-<td>transactionStatus</td>
-<td>Y</td>
-<td>string</td>
-<td>Simulated status of the transaction. Must be &quot;SUCCESS&quot; or &quot;FAILED&quot;.</td>
-</tr>
-</tbody></table>
 
-<blockquote>
-<p>Request Example</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/simulator/transaction'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--data</span> <span class="s1">'{
-  "transactionId": "pyout-01HWZJMV1S387KCWPM1S18RZ7A",
-  "transactionCategory": "PAYOUT",
-  "transactionStatus": "SUCCESS"
-}'</span>
-</code></pre></div><h3 id='response-parameters-4'>Response Parameters</h3>
-<blockquote>
-<p>Response Example</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction webhook simulator success"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>message</td>
-<td>string</td>
-<td>Confirmation message for the simulated action.</td>
-</tr>
-</tbody></table>
-
-<h3 id='response-codes'>Response Codes</h3>
-
-<table><thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>Simulation successful</td>
-</tr>
-</tbody></table>
-
-<p>Note: This endpoint is for internal testing purposes only and should not be used in production environments.</p>
-
-<p><h1 id='balances'>Balances</h1><h2 id='get-balance'>Get Balance</h2>
+<h1 id='balances'>Balances</h1><h2 id='get-balance'>Get Balance</h2>
 <p>Your balance reflects the available funds in your Xenith account. It is debited for outgoing transactions and credited when funds are received.</p>
-
 <h3 id='endpoint'>Endpoint</h3>
-
-<p><code>GET https://openapi.xenithpay.com/v1/balances</code></p></p>
+<p><code>GET https://openapi.xenithpay.com/v1/balances</code></p>
 
 <blockquote>
 <p>Request Example</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/balances'</span> <span class="se">\\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:16:33.186Z'</span> <span class="se">\\</span>
