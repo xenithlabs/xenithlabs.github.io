@@ -755,8 +755,9 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 
 <h3 id='endpoint'>Endpoint</h3>
 
-<p>[Production] <code>POST https://openapi.xenithpay.com/v1/payins</code>\
-[Sandbox] <code>POST https://openapi.sandbox.xenithpay.com/v1/payins</code></p>
+<p>[Production] <code>POST https://openapi.xenithpay.com/v1/payins</code></p></p>
+
+<p>[Sandbox] <code>POST https://openapi.sandbox.xenithpay.com/v1/payins</code></p>
 
 <h3 id='request-header-parameters'>Request Header Parameters</h3>
 
@@ -782,7 +783,7 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature">here</a> for instructions on how to build a signature.</td>
 </tr>
-</tbody></table></p>
+</tbody></table>
 
 <blockquote>
 <p>Request Example</p>
@@ -875,13 +876,10 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <td>URL where the end-customer is redirected to after the transaction is completed.</td>
 </tr>
 </tbody></table>
-
 <h3 id='response-parameters'>Response Parameters</h3>
-
 <blockquote>
 <p>Response Example</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
@@ -1015,8 +1013,9 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 
 <h3 id='endpoint-2'>Endpoint</h3>
 
-<p>[Production] <code>GET https://openapi.xenithpay.com/v1/payins/:id</code>\
-[Sandbox] <code>GET https://openapi.sandbox.xenithpay.com/v1/payins/:id</code></p>
+<p>[Production] <code>GET https://openapi.xenithpay.com/v1/payins/:id</code></p>
+
+<p>[Sandbox] <code>GET https://openapi.sandbox.xenithpay.com/v1/payins/:id</code></p>
 
 <h3 id='request-header-parameters-2'>Request Header Parameters</h3>
 
@@ -1203,8 +1202,9 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 
 <h3 id='endpoint-3'>Endpoint</h3>
 
-<p>[Production] <code>GET https://openapi.xenithpay.com/v1/payins</code>\
-[Sandbox] <code>GET https://openapi.sandbox.xenithpay.com/v1/payins</code></p>
+<p>[Production] <code>GET https://openapi.xenithpay.com/v1/payins</code></p>
+
+<p>[Sandbox] <code>GET https://openapi.sandbox.xenithpay.com/v1/payins</code></p>
 
 <h3 id='request-header-parameters-3'>Request Header Parameters</h3>
 
@@ -1620,11 +1620,13 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <p>Note: These simulations are for testing only and do not affect real funds.</p>
 
 <p><h1 id='pay-out'>Pay Out</h1><h2 id='create-pay-out-request'>Create Pay Out Request</h2>
-<p>You can use this end point to create a Pay out request.</p>
+<p>You can use this endpoint to create a Pay Out request.</p>
 
 <h3 id='endpoint'>Endpoint</h3>
 
-<p><code>POST https://openapi.xenithpay.com/v1/payouts</code></p>
+<p>[Production] <code>POST https://openapi.xenithpay.com/v1/payouts</code></p></p>
+
+<p>[Sandbox] <code>POST https://openapi.sandbox.xenithpay.com/v1/payouts</code></p>
 
 <h3 id='request-header-parameters'>Request Header Parameters</h3>
 
@@ -1650,7 +1652,7 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature">here</a> for instructions on how to build a signature.</td>
 </tr>
-</tbody></table></p>
+</tbody></table>
 
 <blockquote>
 <p>Request Example</p>
@@ -1698,13 +1700,13 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <td>destinationPayoutMethod</td>
 <td>Y</td>
 <td>string</td>
-<td>Payment method for this transaction. List of supported methods can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment method for this transaction. List of supported methods can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutChannel</td>
 <td>Y</td>
 <td>string</td>
-<td>Payment channel for this transaction. List of supported channels can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment channel for this transaction. List of supported channels can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
@@ -1743,13 +1745,10 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <td>Your webhook URL to receive transaction notifications.</td>
 </tr>
 </tbody></table>
-
 <h3 id='response-parameters'>Response Parameters</h3>
-
 <blockquote>
 <p>Response Example</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
@@ -1805,12 +1804,12 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <tr>
 <td>destinationPayoutMethod</td>
 <td>string</td>
-<td>Payment method for this transaction. List of supported methods can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment method for this transaction. List of supported methods can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutChannel</td>
 <td>string</td>
-<td>Payment channel for this transaction. List of supported channels can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment channel for this transaction. List of supported channels can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
@@ -1861,11 +1860,13 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 
 <h2 id='get-pay-out-detail'>Get Pay Out Detail</h2>
 
-<p>This endpoints returns the corresponding information of the Pay Out that matches the provided ID.</p>
+<p>This endpoint returns the corresponding information of the Pay Out that matches the provided ID.</p>
 
 <h3 id='endpoint-2'>Endpoint</h3>
 
-<p><code>GET https://openapi.xenithpay.com/v1/payouts/:id</code></p>
+<p>[Production] <code>GET https://openapi.xenithpay.com/v1/payouts/:id</code></p>
+
+<p>[Sandbox] <code>GET https://openapi.sandbox.xenithpay.com/v1/payouts/:id</code></p>
 
 <h3 id='request-header-parameter'>Request Header Parameter</h3>
 
@@ -1974,12 +1975,12 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <tr>
 <td>destinationPayoutMethod</td>
 <td>string</td>
-<td>Payment method for this transaction. List of supported methods can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment method for this transaction. List of supported methods can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutChannel</td>
 <td>string</td>
-<td>Payment channel for this transaction. List of supported channels can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment channel for this transaction. List of supported channels can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
@@ -2034,7 +2035,9 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 
 <h3 id='endpoint-3'>Endpoint</h3>
 
-<p><code>GET https://openapi.xenithpay.com/v1/payouts</code></p>
+<p>[Production] <code>GET https://openapi.xenithpay.com/v1/payouts</code></p>
+
+<p>[Sandbox] <code>GET https://openapi.sandbox.xenithpay.com/v1/payouts</code></p>
 
 <h3 id='request-header-parameters-2'>Request Header Parameters</h3>
 
@@ -2190,12 +2193,12 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <tr>
 <td>destinationPayoutMethod</td>
 <td>string</td>
-<td>Payment method for this transaction. List of supported methods can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment method for this transaction. List of supported methods can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutChannel</td>
 <td>string</td>
-<td>Payment channel for this transaction. List of supported channels can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
+<td>Payment channel for this transaction. List of supported channels can be found <a href="https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing">here</a>.</td>
 </tr>
 <tr>
 <td>destinationPayoutAccount</td>
@@ -2317,7 +2320,7 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 </tr>
 </tbody></table>
 <h3 id='failure-codes'>Failure Codes</h3>
-<p>List of failure codes can be found <a href="https://www.google.com](https://docs.google.com/spreadsheets/d/1u0JpcnSm4QOC1VK2Voc8CvZqmGTddi8Dj9sIgK60Dqw/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1ZUyCCedunqpLK4OWiUkH9N1E__DiW0Zz0REruy-osaQ/edit?usp=sharing">here</a>.</p>
+<p>List of failure codes can be found <a href="https://docs.google.com/spreadsheets/d/1ZUyCCedunqpLK4OWiUkH9N1E__DiW0Zz0REruy-osaQ/edit?usp=sharing">here</a>.</p>
 <h2 id='simulate-pay-out'>Simulate Pay Out</h2>
 <p>To simulate payout transactions, you can create payouts normally using the standard Pay Out API endpoints. However, to control the outcome, use the following account number prefixes:</p>
 <h3 id='successful-transaction'>Successful Transaction</h3>
