@@ -328,7 +328,14 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='webhooks'>Webhooks</h1>
-<p>Xenith uses webhooks to notify your application whenever an event occurs on your account. You can set up webhooks for events that Xenith doesn&#39;t automatically notify you about, such as when a Pay In is successful, expired, or failed, and when a Pay Out is successful or failed.</p>
+<p>Xenith uses webhooks to automatically notify your application about important events related to your transactions. These events include:</p>
+
+<ul>
+<li>Pay In status changes (successful, expired, or failed)</li>
+<li>Pay Out status changes (successful or failed)</li>
+</ul>
+
+<p>When these events occur, Xenith sends a POST request to a URL you specify (the webhook endpoint) with details about the event. This allows your application to receive real-time updates and take appropriate actions without needing to constantly poll our API.</p>
 <h3 id='common-webhook-structure'>Common Webhook Structure</h3>
 <p>All webhooks share a common structure:</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
