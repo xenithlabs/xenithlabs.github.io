@@ -306,6 +306,9 @@
                     <a href="#check-webhook-signature" class="toc-h2 toc-link" data-title="Check Webhook Signature">Check Webhook Signature</a>
                   </li>
                   <li>
+                    <a href="#webhook-security-requirements" class="toc-h2 toc-link" data-title="Webhook Security Requirements">Webhook Security Requirements</a>
+                  </li>
+                  <li>
                     <a href="#delivery-attempts-and-retries" class="toc-h2 toc-link" data-title="Delivery Attempts and Retries">Delivery Attempts and Retries</a>
                   </li>
               </ul>
@@ -485,6 +488,52 @@
 <code>
 UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0xN1QxNTozOTowMFpS0gUj2iAg9PKzDSi1ksqitpLfIlHk8LxDzodMG+ePcA==
 </code></p>
+<h2 id='webhook-security-requirements'>Webhook Security Requirements</h2><h3 id='tls-version'>TLS Version</h3>
+<ul>
+<li>The server receiving webhooks from our system must support TLS 1.2 or above.</li>
+<li>TLS 1.0 and 1.1 are not accepted due to known vulnerabilities.</li>
+</ul>
+<h3 id='cipher-suites'>Cipher Suites</h3>
+<p>The server must support at least one of the following cipher suites:</p>
+
+<ul>
+<li><code>TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</code></li>
+<li><code>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</code></li>
+<li><code>TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</code></li>
+<li><code>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</code></li>
+<li><code>TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305</code></li>
+<li><code>TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305</code></li>
+<li><code>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA</code></li>
+<li><code>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</code></li>
+<li><code>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</code></li>
+<li><code>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA</code></li>
+<li><code>TLS_RSA_WITH_AES_128_GCM_SHA256</code></li>
+<li><code>TLS_RSA_WITH_AES_256_GCM_SHA384</code></li>
+<li><code>TLS_RSA_WITH_AES_128_CBC_SHA</code></li>
+<li><code>TLS_RSA_WITH_AES_256_CBC_SHA</code></li>
+<li><code>TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA</code></li>
+<li><code>TLS_RSA_WITH_3DES_EDE_CBC_SHA</code></li>
+</ul>
+<h3 id='additional-security-measures'>Additional Security Measures</h3>
+<ol>
+<li>Certificate Validation: The server&#39;s SSL certificate must be valid and trusted.</li>
+<li>Server Name Indication (SNI): The server should support SNI for proper certificate selection.</li>
+<li>Perfect Forward Secrecy: The chosen cipher suite should support PFS to ensure past communications remain secure even if the private key is compromised.</li>
+</ol>
+<h3 id='implementation-guidelines'>Implementation Guidelines</h3>
+<ol>
+<li>Configure your web server (e.g., Nginx, Apache) to only allow TLS 1.2 and above.</li>
+<li>Update your server&#39;s cipher suite configuration to include the required ciphers.</li>
+<li>Regularly update your SSL/TLS libraries to ensure support for the latest security standards.</li>
+<li>Implement proper error handling for failed connections due to unsupported TLS versions or cipher suites.</li>
+</ol>
+<h3 id='testing-and-verification'>Testing and Verification</h3>
+<ol>
+<li>Use online SSL/TLS testing tools (e.g., SSL Labs, TestSSLServer) to verify your server configuration.</li>
+<li>Periodically audit your server&#39;s TLS settings to ensure continued compliance with these requirements.</li>
+</ol>
+
+<p>By adhering to these requirements, you ensure that the webhook communication between our system and your server maintains a high level of security and data integrity.</p>
 <h2 id='delivery-attempts-and-retries'>Delivery Attempts and Retries</h2>
 <p>Xenith attempts to deliver your webhook eleven times with exponential backoff between each interval. We will stop retrying after receiving a response from your server or if there is still no response after the final attempt.</p>
 
