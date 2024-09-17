@@ -2321,14 +2321,18 @@ UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0x
 - Bank Account: Add <code>6666</code> as the first four digits in the account number.
 - Result: The Pay Out will fail.</p>
 <h3 id='example-usage'>Example Usage</h3>
+<blockquote>
 <p>To simulate a successful payout, you would use an account number like this when creating a Pay Out:</p>
+</blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5555123456789"</span><span class="p">,</span><span class="w">
   </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">other</span><span class="w"> </span><span class="err">Pay</span><span class="w"> </span><span class="err">Out</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">parameters</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
+<blockquote>
 <p>To simulate a failed payout, you would use an account number like this:</p>
+</blockquote>
 
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6666123456789"</span><span class="p">,</span><span class="w">
