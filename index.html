@@ -2344,14 +2344,14 @@ UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0x
 <li>If you use an account number that doesn&#39;t start with either <code>5555</code> or <code>6666</code>, the transaction will remain in a pending state.</li>
 </ol>
 
+<blockquote>
 <p>For example, using a regular account number without the specified prefixes:</p>
+</blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
   </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">other</span><span class="w"> </span><span class="err">Pay</span><span class="w"> </span><span class="err">Out</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">parameters</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-
-<p>This transaction will be created successfully but will remain in a pending state, allowing you to test your application&#39;s handling of pending transactions.</p>
 
 <p><h1 id='balances'>Balances</h1><h2 id='get-balance'>Get Balance</h2>
 <p>Your balance reflects the available funds in your Xenith account. It is debited for outgoing transactions and credited when funds are received.</p>
