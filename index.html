@@ -2313,57 +2313,28 @@ UE9TVApodHRwczovL2V4YW1wbGUuY29tL3Y4L3NlbmQvdGhlL2NhbGxiYWNrL2hlcmUKMjAyNC0wOS0x
 <h2 id='simulate-pay-out'>Simulate Pay Out</h2>
 <p>To simulate payout transactions, you can create payouts normally using the standard Pay Out API endpoints. However, to control the outcome, use the following account number prefixes:</p>
 <h3 id='successful-transaction'>Successful Transaction</h3>
-<p>To simulate a successful payout:
-- Bank Account: Add <code>5555</code> as the first four digits in the account number.
-- Result: The Pay Out will succeed.</p>
+<p>To simulate a successful payout:</p>
+
+<ul>
+<li>Bank Account: Add <code>5555</code> as the first four digits in the account number.</li>
+<li>Result: The Pay Out will succeed.</li>
+</ul>
 <h3 id='failed-transaction'>Failed Transaction</h3>
-<p>To simulate a failed payout:
-- Bank Account: Add <code>6666</code> as the first four digits in the account number.
-- Result: The Pay Out will fail.</p>
+<p>To simulate a failed payout:</p>
 
-<blockquote>
-<p>To simulate a successful payout, you would use an account number like this when creating a Pay Out:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5555123456789"</span><span class="p">,</span><span class="w">
-  </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">other</span><span class="w"> </span><span class="err">Pay</span><span class="w"> </span><span class="err">Out</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">parameters</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
+<ul>
+<li>Bank Account: Add <code>6666</code> as the first four digits in the account number.</li>
+<li>Result: The Pay Out will fail.</li>
+</ul>
 
-<blockquote>
-<p>To simulate a failed payout, you would use an account number like this:</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6666123456789"</span><span class="p">,</span><span class="w">
-  </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">other</span><span class="w"> </span><span class="err">Pay</span><span class="w"> </span><span class="err">Out</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">parameters</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='notes'>Notes:</h3>
-<ol>
-<li>These simulation account numbers should only be used in test environments and never in production. In production, always use real, valid account numbers.</li>
-<li>If you use an account number that doesn&#39;t start with either <code>5555</code> or <code>6666</code>, the transaction will remain in a pending state.</li>
-</ol>
-
-<blockquote>
-<p>For example, using a regular account number without the specified prefixes:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"destinationPayoutAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
-  </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">other</span><span class="w"> </span><span class="err">Pay</span><span class="w"> </span><span class="err">Out</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">parameters</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p><h1 id='balances'>Balances</h1><h2 id='get-balance'>Get Balance</h2>
+<h1 id='balances'>Balances</h1><h2 id='get-balance'>Get Balance</h2>
 <p>Your balance reflects the available funds in your Xenith account. It is debited for outgoing transactions and credited when funds are received.</p>
-
 <h3 id='endpoint'>Endpoint</h3>
-
-<p><code>GET https://openapi.xenithpay.com/v1/balances</code></p></p>
+<p><code>GET https://openapi.xenithpay.com/v1/balances</code></p>
 
 <blockquote>
 <p>Request Example</p>
 </blockquote>
-
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/balances'</span> <span class="se">\\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:16:33.186Z'</span> <span class="se">\\</span>
