@@ -565,7 +565,7 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <ol>
   <li>Extract the <strong>X-Signature</strong> from the request header.</li>
   <li>Extract the <strong>timestamp</strong> from the request body.</li>
-  <li>Concatenate the HTTP method, full URL (including query parameters if any), and timestamp, separated by newlines (<code>\n</code>).</li>
+  <li>Concatenate the HTTP method, full callback URL (including query parameters if any), and timestamp, separated by newlines (<code>\n</code>).</li>
   <li>Compute an <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code"><strong>HMAC</strong></a> using the <a href="https://en.wikipedia.org/wiki/SHA-2"><strong>SHA-256</strong></a> hash function. Use your webhook secret as the key and the concatenated string as the message.</li>
   <li>Encode the resulting hash using Base64.</li>
   <li>Compare the computed signature with the <strong>X-Signature</strong> from the header. If they match, the webhook is verified.</li>
@@ -613,7 +613,7 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <td><code>POST</code></td>
 </tr>
 <tr>
-<td>URL</td>
+<td>Callback URL</td>
 <td><code>https://example.com/webhook?param=value</code></td>
 </tr>
 <tr>
@@ -649,7 +649,7 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 </ul></li>
 </ol>
 
-<p>Note: The actual signature will vary based on your specific inputs. Always use the full URL, including any query parameters, when generating or verifying the signature. The secret used for signature verification should be securely stored on your server and not transmitted with the webhook payload.</p>
+<p>Note: The actual signature will vary based on your specific inputs. Always use the full callback URL, including any query parameters, when generating or verifying the signature. The secret used for signature verification should be securely stored on your server and not transmitted with the webhook payload.</p>
 
 <h2 id='webhook-security-requirements'>Webhook Security Requirements</h2><h3 id='tls-version'>TLS Version</h3>
 <ul>
