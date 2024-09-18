@@ -340,9 +340,6 @@
                     <a href="#common-webhook-structure" class="toc-h2 toc-link" data-title="Common Webhook Structure">Common Webhook Structure</a>
                   </li>
                   <li>
-                    <a href="#transaction-specific-webhook-formats" class="toc-h2 toc-link" data-title="Transaction-Specific Webhook Formats">Transaction-Specific Webhook Formats</a>
-                  </li>
-                  <li>
                     <a href="#webhook-response" class="toc-h2 toc-link" data-title="Webhook Response">Webhook Response</a>
                   </li>
                   <li>
@@ -545,15 +542,6 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 </tr>
 </tbody></table>
 
-<h3 id='transaction-specific-webhook-formats'>Transaction-Specific Webhook Formats</h3>
-
-<p>For details on the specific webhook formats, please refer to the following sections:</p>
-
-<ul>
-<li><a href="#pay-out-webhook">Pay Out Webhook</a></li>
-<li><a href="#pay-in-webhook">Pay In Webhook</a></li>
-</ul>
-
 <h3 id='webhook-response'>Webhook Response</h3>
 
 <p>Your system should immediately respond with a 200 status code upon receiving a webhook. If a failure occurs, automatic retry will kick-off for the next 24 hours. Refer to the <a href="#delivery-attempts-and-retries">Delivery Attempts and Retries</a> section for more details.</p>
@@ -563,14 +551,29 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <p>Xenith signs all webhook events by including a signature in the request headers. This allows you to verify that the events were sent by Xenith. Follow these steps to verify the signature:</p>
 
 <ol>
-  <li>Extract the <strong>X-Signature</strong> from the request header.</li>
-  <li>Extract the <strong>timestamp</strong> from the request body.</li>
-  <li>Concatenate the HTTP method, full callback URL (including query parameters if any), and timestamp, separated by newlines (<code>\n</code>).</li>
-  <li>Compute an <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code"><strong>HMAC</strong></a> using the <a href="https://en.wikipedia.org/wiki/SHA-2"><strong>SHA-256</strong></a> hash function. Use your webhook secret as the key and the concatenated string as the message.</li>
-  <li>Encode the resulting hash using Base64.</li>
-  <li>Compare the computed signature with the <strong>X-Signature</strong> from the header. If they match, the webhook is verified.</li>
-  <li>Optionally, check if the timestamp is within an acceptable time range to prevent replay attacks.</li>
+<li>Construct the string to be signed by concatenating the following elements separated by <code>\n</code> character:
+<code>
+{HTTP_METHOD}\n{URL_PATH}\n{REQUEST_BODY}\n{TIMESTAMP_RFC3339}
+</code>
+
+<ul>
+<li><code>HTTP_METHOD</code>: The HTTP method in uppercase (e.g., <code>GET</code>, <code>POST</code>, <code>PUT</code>)</li>
+<li><code>URL_PATH</code>: The full path of the URL, including query parameters if any</li>
+<li><code>REQUEST_BODY</code>: The full body of the request. For <code>GET</code> requests or requests without a body, use an empty string</li>
+<li><code>TIMESTAMP_RFC3339</code>: The timestamp from <code>X-Xenith-Timestamp</code> header in RFC3339 format (e.g., <code>2024-09-17T15:39:00Z</code>)</li>
+</ul></li>
+<li>Create an <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code">HMAC</a> using <a href="https://en.wikipedia.org/wiki/SHA-2">SHA256</a> hash from the concatenated string as the message and your webhook secret as the key</li>
+<li>Encode the resulting hash in Base64</li>
+<li>Verify the generated signature with the <code>X-Xenith-Signature</code> header from the webhook request is the same with computed signature by your system</li>
+<li>Ensure the timestamp in the request body is within an acceptable time range to prevent replay attacks</li>
 </ol>
+
+<blockquote>
+<p>Note: The actual signature will vary based on your specific inputs.
+Always use the full path, including any query parameters,
+when generating or verifying the signature. The secret used for signature
+verification should be securely stored on your server and will not be transmitted with the webhook payload.</p>
+</blockquote>
 
 <h3 id='request-header-parameters'>Request Header Parameters</h3>
 
@@ -585,78 +588,118 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <td><code>application/json</code></td>
 </tr>
 <tr>
-<td>User-Agent</td>
-<td><code>Xenithpay.com</code></td>
+<td>X-Xenith-Timestamp</td>
+<td><code>2024-09-17T15:39:00Z</code></td>
 </tr>
 <tr>
-<td>X-Signature</td>
+<td>X-Xenith-Signature</td>
 <td><a href="#webhook-signature-example">Computed Signature</a></td>
 </tr>
 </tbody></table>
 
-<h3 id='webhook-signature-example'>Webhook Signature Example</h3>
-
-<p>Here&#39;s how to generate and verify the webhook signature:</p>
+<h3 id='webhook-signature-example'>Webhook Signature Example</h3><h4 id='payin-webhook'>Payin Webhook</h4>
+<p>Example Data:</p>
 
 <table><thead>
 <tr>
-<th>Field</th>
+<th>Parameter</th>
 <th>Value</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>Timestamp</td>
-<td><code>2024-09-17T15:39:00Z</code> (From request body, always in UTC)</td>
-</tr>
 <tr>
 <td>HTTP Method</td>
 <td><code>POST</code></td>
 </tr>
 <tr>
-<td>Callback URL</td>
-<td><code>https://example.com/webhook?param=value</code></td>
+<td>Path</td>
+<td><code>/v1/webhook?param=value</code></td>
+</tr>
+<tr>
+<td>Body</td>
+<td><a href="#payin-webhook-request-example">Example Body</a></td>
+</tr>
+<tr>
+<td><code>X-Xenith-Timestamp</code> Header</td>
+<td><code>2024-09-02T11:33:20.069Z</code></td>
 </tr>
 <tr>
 <td>Secret</td>
-<td><code>c238eaeb9561e104d6712f21bc0552818dcf3290a351103e4aba575df2a8c951</code></td>
+<td><code>verysecretstring</code></td>
 </tr>
 </tbody></table>
-
-<p>Signature generation and verification process:</p>
-
+<h5 id='payin-webhook-request-example'>Payin Webhook Request Example</h5><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-02T11:33:20.069Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pymt-01HYKJR29861D317A60ADSJBJ1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100008"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paymentMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIRTUAL_ACCOUNT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paymentChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paymentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8212000337121083"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"paymentCodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_NUMBER"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-referenceCode-1716098555"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Snowy"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-23T20:37:12.232Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"expirationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T20:37:12.104Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <ol>
-<li><p>Concatenate the following values, separated by newlines (<code>\n</code>):</p>
-
-<ul>
-<li>HTTP method (uppercase)</li>
-<li>Full Callback URL (including query parameters if any)</li>
-<li>Timestamp from the request body</li>
-<li>Example: <code>POST\nhttps://example.com/webhook?param=value\n2024-09-17T15:39:00Z</code></li>
-</ul></li>
-<li><p>Create an HMAC-SHA256 hash:</p>
-
-<ul>
-<li>Use the concatenated string as the message</li>
-<li>Use your webhook secret as the key</li>
-</ul></li>
-<li><p>Encode the resulting hash in Base64. This is your signature.</p></li>
-<li><p>To verify:</p>
-
-<ul>
-<li>Generate the signature using steps 1-3</li>
-<li>Compare the generated signature with the <code>X-Signature</code> header from the webhook request</li>
-<li>Ensure the timestamp in the request body is within an acceptable time range to prevent replay attacks</li>
-</ul></li>
+<li>Concatenated string:
+<code>
+POST\n/v1/webhook?param=value\n{&quot;schemaVersion&quot;:&quot;1.0.0&quot;,&quot;timestamp&quot;:&quot;2024-09-02T11:33:20.069Z&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;pymt-01HYKJR29861D317A60ADSJBJ1&quot;,&quot;initiatedAmount&quot;:&quot;100008&quot;,&quot;paymentAmount&quot;:&quot;0&quot;,&quot;feeAmount&quot;:&quot;0&quot;,&quot;currency&quot;:&quot;IDR&quot;,&quot;paymentMethod&quot;:&quot;VIRTUAL_ACCOUNT&quot;,&quot;paymentChannel&quot;:&quot;PERMATA&quot;,&quot;paymentCode&quot;:&quot;8212000337121083&quot;,&quot;paymentCodeType&quot;:&quot;ACCOUNT_NUMBER&quot;,&quot;referenceCode&quot;:&quot;test-referenceCode-1716098555&quot;,&quot;customerReference&quot;:&quot;test-customerReference-123&quot;,&quot;customerName&quot;:&quot;John Snowy&quot;,&quot;status&quot;:&quot;PENDING&quot;,&quot;createdTime&quot;:&quot;2024-05-23T20:37:12.232Z&quot;,&quot;updatedTime&quot;:&quot;2024-05-23T20:37:12.232Z&quot;,&quot;expirationTime&quot;:&quot;2024-05-24T20:37:12.104Z&quot;,&quot;description&quot;:&quot;Hello&quot;}}\n2024-09-02T11:33:20.069Z
+</code></li>
+<li>Computed Signature (Base64 of HMAC 256 Concatenated string):
+<code>
+UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVzdGFtcCI6IjIwMjQtMDktMDJUMTE6MzM6MjAuMDY5WiIsImRhdGEiOnsiaWQiOiJweW10LTAxSFlLSlIyOTg2MUQzMTdBNjBBRFNKQkoxIiwiaW5pdGlhdGVkQW1vdW50IjoiMTAwMDA4IiwicGF5bWVudEFtb3VudCI6IjAiLCJmZWVBbW91bnQiOiIwIiwiY3VycmVuY3kiOiJJRFIiLCJwYXltZW50TWV0aG9kIjoiVklSVFVBTF9BQ0NPVU5UIiwicGF5bWVudENoYW5uZWwiOiJQRVJNQVRBIiwicGF5bWVudENvZGUiOiI4MjEyMDAwMzM3MTIxMDgzIiwicGF5bWVudENvZGVUeXBlIjoiQUNDT1VOVF9OVU1CRVIiLCJyZWZlcmVuY2VDb2RlIjoidGVzdC1yZWZlcmVuY2VDb2RlLTE3MTYwOTg1NTUiLCJjdXN0b21lclJlZmVyZW5jZSI6InRlc3QtY3VzdG9tZXJSZWZlcmVuY2UtMTIzIiwiY3VzdG9tZXJOYW1lIjoiSm9obiBTbm93eSIsInN0YXR1cyI6IlBFTkRJTkciLCJjcmVhdGVkVGltZSI6IjIwMjQtMDUtMjNUMjA6Mzc6MTIuMjMyWiIsInVwZGF0ZWRUaW1lIjoiMjAyNC0wNS0yM1QyMDozNzoxMi4yMzJaIiwiZXhwaXJhdGlvblRpbWUiOiIyMDI0LTA1LTI0VDIwOjM3OjEyLjEwNFoiLCJkZXNjcmlwdGlvbiI6IkhlbGxvIn19CjIwMjQtMDktMDJUMTE6MzM6MjAuMDY5WrS+JhW3I6+HCFM6xHFQX+X5ZV1nDkDvfMOBKciGv3B4
+</code></li>
 </ol>
-
-<p>Note: The actual signature will vary based on your specific inputs. Always use the full callback URL, including any query parameters, when generating or verifying the signature. The secret used for signature verification should be securely stored on your server and not transmitted with the webhook payload.</p>
-
+<h5 id='payout-webhook-request-example'>Payout Webhook Request Example</h5><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-02T11:33:20.069Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"initiatedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1500"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IDR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"destinationPayoutChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERMATA"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"destinationPayoutMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANK_TRANSFER"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"referenceCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"referenceCode-1716098555"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-customerReference-123"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:34.251Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-24T05:00:35.441Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending Money-1716098555"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ol>
+<li>Concatenated string:
+<code>
+POST\n/v1/webhook?param=value\n{&quot;schemaVersion&quot;:&quot;1.0.0&quot;,&quot;timestamp&quot;:&quot;2024-09-02T11:33:20.069Z&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;pyout-01HYMFHRJB0ZXWNVFJ7E1KW71N&quot;,&quot;initiatedAmount&quot;:&quot;1500&quot;,&quot;sentAmount&quot;:&quot;1500&quot;,&quot;feeAmount&quot;:&quot;0&quot;,&quot;currency&quot;:&quot;IDR&quot;,&quot;destinationPayoutChannel&quot;:&quot;PERMATA&quot;,&quot;destinationPayoutMethod&quot;:&quot;BANK_TRANSFER&quot;,&quot;referenceCode&quot;:&quot;referenceCode-1716098555&quot;,&quot;customerReference&quot;:&quot;test-customerReference-123&quot;,&quot;status&quot;:&quot;SUCCESS&quot;,&quot;createdTime&quot;:&quot;2024-05-24T05:00:34.251Z&quot;,&quot;updatedTime&quot;:&quot;2024-05-24T05:00:35.441Z&quot;,&quot;description&quot;:&quot;Sending Money-1716098555&quot;}}\n2024-09-02T11:33:20.069Z
+</code></li>
+<li>Computed Signature (Base64 of HMAC 256 Concatenated string):
+<code>
+UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVzdGFtcCI6IjIwMjQtMDktMDJUMTE6MzM6MjAuMDY5WiIsImRhdGEiOnsiaWQiOiJweW91dC0wMUhZTUZIUkpCMFpYV05WRko3RTFLVzcxTiIsImluaXRpYXRlZEFtb3VudCI6IjE1MDAiLCJzZW50QW1vdW50IjoiMTUwMCIsImZlZUFtb3VudCI6IjAiLCJjdXJyZW5jeSI6IklEUiIsImRlc3RpbmF0aW9uUGF5b3V0Q2hhbm5lbCI6IlBFUk1BVEEiLCJkZXN0aW5hdGlvblBheW91dE1ldGhvZCI6IkJBTktfVFJBTlNGRVIiLCJyZWZlcmVuY2VDb2RlIjoicmVmZXJlbmNlQ29kZS0xNzE2MDk4NTU1IiwiY3VzdG9tZXJSZWZlcmVuY2UiOiJ0ZXN0LWN1c3RvbWVyUmVmZXJlbmNlLTEyMyIsInN0YXR1cyI6IlNVQ0NFU1MiLCJjcmVhdGVkVGltZSI6IjIwMjQtMDUtMjRUMDU6MDA6MzQuMjUxWiIsInVwZGF0ZWRUaW1lIjoiMjAyNC0wNS0yNFQwNTowMDozNS40NDFaIiwiZGVzY3JpcHRpb24iOiJTZW5kaW5nIE1vbmV5LTE3MTYwOTg1NTUifX0KMjAyNC0wOS0wMlQxMTozMzoyMC4wNjlanq20oeLOGiqJ0vviqdL1O70Jwwg4IBO6bpx0IUXmyMY=
+</code></li>
+</ol>
 <h2 id='webhook-security-requirements'>Webhook Security Requirements</h2><h3 id='tls-version'>TLS Version</h3>
+
 <ul>
 <li>The server receiving webhooks from our system must support TLS 1.2 or above.</li>
 <li>TLS 1.0 and 1.1 are not accepted due to known vulnerabilities.</li>
 </ul>
+
 <h3 id='cipher-suites'>Cipher Suites</h3>
+
 <p>The server must support at least one of the following cipher suites:</p>
 
 <ul>
@@ -677,26 +720,33 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <li><code>TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA</code></li>
 <li><code>TLS_RSA_WITH_3DES_EDE_CBC_SHA</code></li>
 </ul>
+
 <h3 id='additional-security-measures'>Additional Security Measures</h3>
+
 <ol>
 <li>Certificate Validation: The server&#39;s SSL certificate must be valid and trusted.</li>
 <li>Server Name Indication (SNI): The server should support SNI for proper certificate selection.</li>
 <li>Perfect Forward Secrecy: The chosen cipher suite should support PFS to ensure past communications remain secure even if the private key is compromised.</li>
 </ol>
+
 <h3 id='implementation-guidelines'>Implementation Guidelines</h3>
+
 <ol>
 <li>Configure your web server (e.g., Nginx, Apache) to only allow TLS 1.2 and above.</li>
 <li>Update your server&#39;s cipher suite configuration to include the required ciphers.</li>
 <li>Regularly update your SSL/TLS libraries to ensure support for the latest security standards.</li>
 <li>Implement proper error handling for failed connections due to unsupported TLS versions or cipher suites.</li>
 </ol>
+
 <h3 id='testing-and-verification'>Testing and Verification</h3>
+
 <ol>
-<li>Use online SSL/TLS testing tools (e.g., SSL Labs, TestSSLServer) to verify your server configuration.</li>
+<li>Use online SSL/TLS testing tools (e.g. <a href="https://www.ssllabs.com/ssltest/">SSL Labs</a>) to verify your server configuration.</li>
 <li>Periodically audit your server&#39;s TLS settings to ensure continued compliance with these requirements.</li>
 </ol>
 
 <p>By adhering to these requirements, you ensure that the webhook communication between our system and your server maintains a high level of security and data integrity.</p>
+
 <h2 id='delivery-attempts-and-retries'>Delivery Attempts and Retries</h2>
 
 <p>Xenith attempts to deliver your webhook eleven times with exponential backoff between each interval. We will stop retrying after receiving a response from your server or if there is still no response after the final attempt.</p>
@@ -1478,12 +1528,17 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 </thead><tbody>
 <tr>
 <td>Content-Type</td>
-<td>application/json</td>
+<td><code>application/json</code></td>
 <td>Specifies the format of the request body (JSON).</td>
 </tr>
 <tr>
-<td>X-Signature</td>
-<td>ac65b5196dc3791bc8af035fddc738d756370852</td>
+<td>X-Xenith-Timestamp</td>
+<td><code>2024-09-17T15:39:00Z</code></td>
+<td>The request timestamp, use this to generate signature.</td>
+</tr>
+<tr>
+<td>X-Xenith-Signature</td>
+<td><code>ac65b5196dc3791bc8af035fddc738d756370852</code></td>
 <td>Signature for verifying the request.</td>
 </tr>
 </tbody></table>
@@ -2288,12 +2343,17 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 </thead><tbody>
 <tr>
 <td>Content-Type</td>
-<td>application/json</td>
+<td><code>application/json</code></td>
 <td>Specifies the format of the request body (JSON).</td>
 </tr>
 <tr>
-<td>X-Signature</td>
-<td>ac65b5196dc3791bc8af035fddc738d756370852</td>
+<td>X-Xenith-Timestamp</td>
+<td><code>2024-09-17T15:39:00Z</code></td>
+<td>The request timestamp, use this to generate signature.</td>
+</tr>
+<tr>
+<td>X-Xenith-Signature</td>
+<td><code>ac65b5196dc3791bc8af035fddc738d756370852</code></td>
 <td>Signature for verifying the request.</td>
 </tr>
 </tbody></table>
