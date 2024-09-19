@@ -568,12 +568,12 @@ pm.request.headers.add({ key: "Xenith-Request-Timestamp", value: timestamp });</
 <li>Ensure the timestamp in the request body is within an acceptable time range to prevent replay attacks</li>
 </ol>
 
-<blockquote>
-<p>Note: The actual signature will vary based on your specific inputs.
+<aside class="notice">
+Note: The actual signature will vary based on your specific inputs.
 Always use the full path, including any query parameters,
 when generating or verifying the signature. The secret used for signature
-verification should be securely stored on your server and will not be transmitted with the webhook payload.</p>
-</blockquote>
+verification should be securely stored on your server and will not be transmitted with the webhook payload.
+</aside>
 
 <h3 id='request-header-parameters'>Request Header Parameters</h3>
 
@@ -627,7 +627,7 @@ verification should be securely stored on your server and will not be transmitte
 <td><code>c238eaeb9561e104d6712f21bc0552818dcf3290a351103e4aba575df2a8c951</code></td>
 </tr>
 </tbody></table>
-<h5 id='payin-webhook-request-example'>Payin Webhook Request Example</h5><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h3 id='payin-webhook-request-example'>Payin Webhook Request Example</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-02T11:33:20.069Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -661,7 +661,7 @@ POST\n/v1/webhook?param=value\n{&quot;schemaVersion&quot;:&quot;1.0.0&quot;,&quo
 UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVzdGFtcCI6IjIwMjQtMDktMDJUMTE6MzM6MjAuMDY5WiIsImRhdGEiOnsiaWQiOiJweW10LTAxSFlLSlIyOTg2MUQzMTdBNjBBRFNKQkoxIiwiaW5pdGlhdGVkQW1vdW50IjoiMTAwMDA4IiwicGF5bWVudEFtb3VudCI6IjAiLCJmZWVBbW91bnQiOiIwIiwiY3VycmVuY3kiOiJJRFIiLCJwYXltZW50TWV0aG9kIjoiVklSVFVBTF9BQ0NPVU5UIiwicGF5bWVudENoYW5uZWwiOiJQRVJNQVRBIiwicGF5bWVudENvZGUiOiI4MjEyMDAwMzM3MTIxMDgzIiwicGF5bWVudENvZGVUeXBlIjoiQUNDT1VOVF9OVU1CRVIiLCJyZWZlcmVuY2VDb2RlIjoidGVzdC1yZWZlcmVuY2VDb2RlLTE3MTYwOTg1NTUiLCJjdXN0b21lclJlZmVyZW5jZSI6InRlc3QtY3VzdG9tZXJSZWZlcmVuY2UtMTIzIiwiY3VzdG9tZXJOYW1lIjoiSm9obiBTbm93eSIsInN0YXR1cyI6IlBFTkRJTkciLCJjcmVhdGVkVGltZSI6IjIwMjQtMDUtMjNUMjA6Mzc6MTIuMjMyWiIsInVwZGF0ZWRUaW1lIjoiMjAyNC0wNS0yM1QyMDozNzoxMi4yMzJaIiwiZXhwaXJhdGlvblRpbWUiOiIyMDI0LTA1LTI0VDIwOjM3OjEyLjEwNFoiLCJkZXNjcmlwdGlvbiI6IkhlbGxvIn19CjIwMjQtMDktMDJUMTE6MzM6MjAuMDY5WrS+JhW3I6+HCFM6xHFQX+X5ZV1nDkDvfMOBKciGv3B4
 </code></li>
 </ol>
-<h5 id='payout-webhook-request-example'>Payout Webhook Request Example</h5><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h3 id='payout-webhook-request-example'>Payout Webhook Request Example</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-02T11:33:20.069Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1675,7 +1675,9 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 </tr>
 </tbody></table>
 
-<p>Note: These simulations are for testing only and do not affect real funds.</p>
+<aside class="warning">
+Note: These simulations are for testing only and do not affect real funds.
+</aside>
 
 <p><h1 id='pay-out'>Pay Out</h1><h2 id='create-pay-out-request'>Create Pay Out Request</h2>
 <p>You can use this endpoint to create a Pay Out request.</p>
