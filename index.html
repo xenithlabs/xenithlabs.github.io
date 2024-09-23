@@ -836,6 +836,10 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 <td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature-and-set-headers">here</a> for instructions on how to build a signature.</td>
 </tr>
+<tr>
+<td>X-Idempotency-Key</td>
+<td><code>01J8EDHKK18A0BVW9YWVKBH85K</code> (A unique key to prevent duplicate requests. Must be unique across all payin transactions for the merchant. Max 100 characters.)</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -843,10 +847,11 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 </blockquote>
 
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://openapi.xenithpay.com/v1/payins'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2451d6ae4b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:37:11.863Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: IV4CppSo80b88vLLBjL1aKAuw5WE4Ei+nNWiMqff/aU='</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-Idempotency-Key: 01J8EDHKK18A0BVW9YWVKBH85K'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
   "initiatedAmount": "100008",
   "currency": "IDR",
@@ -1060,6 +1065,44 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 </tr>
 </tbody></table>
 
+<h3 id='error-codes'>Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The request failed due to invalid input parameters. Check the error response for details on which fields are invalid and correct them accordingly. Common issues include missing required fields or incorrect data formats.</td>
+</tr>
+<tr>
+<td>DUPLICATE_TRANSACTION_ERROR<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>Idempotency key has been used before. Use a unique idempotency key and try again.</td>
+</tr>
+<tr>
+<td>MINIMUM_AMOUNT_PAYIN_LIMIT<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The transaction amount is below the minimum allowed limit for pay-ins. Contact our support team to get information about the current minimum amount limits for each payment channel. Adjust your request based on the information provided by support.</td>
+</tr>
+<tr>
+<td>MAXIMUM_AMOUNT_PAYIN_LIMIT<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The transaction amount exceeds the maximum allowed limit for pay-ins. Reach out to our support team to inquire about the current maximum amount limits for each payment channel. Modify your request to be within the limits specified by the support team.</td>
+</tr>
+<tr>
+<td>INVALID_PAYMENT_CHANNEL<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The specified payment channel is not valid or not supported. Ensure you&#39;re using a correct and active payment channel code as listed in our documentation.</td>
+</tr>
+<tr>
+<td>MAXIMUM_DAILY_TRANSACTION_VOLUME_EXCEEDED<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>You&#39;ve reached the maximum allowed transaction volume for the day. This limit is in place for security reasons. Wait until the next day to process more transactions, or contact support if you need to increase your limit.</td>
+</tr>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An error occurred while connecting to our server. This could be due to temporary server issues. To ensure the transaction wasn&#39;t processed:<br/>1. Use the <a href="#list-pay-in">Get Payin List API</a> to check if the disbursement was created.<br/>2. If not found, you can safely retry the request.<br/>3. When retrying, use the <code>X-Idempotency-Key</code> header with the same value to prevent duplicate transactions.</td>
+</tr>
+</tbody></table>
+
 <h2 id='get-pay-in-detail'>Get Pay In Detail</h2>
 
 <p>This endpoint returns the corresponding information of the Pay In that matches the provided ID.</p>
@@ -1104,7 +1147,7 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-23T20:56:56.404Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: ak7uyB/pmhng2dDHpXuHW08Za9ba/IYfdWOjguk0ZFA='</span>
-</code></pre></div><h3 id='request-body-parameters-2'>Request Body Parameters</h3>
+</code></pre></div><h3 id='path-parameters'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1249,6 +1292,28 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 </tr>
 </tbody></table>
 
+<h3 id='error-codes-2'>Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR<br/><code>400</code></td>
+<td>Invalid input parameters. Check the error response for details on which parameters are incorrect. Review the API documentation for proper parameter format and requirements.</td>
+</tr>
+<tr>
+<td>DATA_NOT_FOUND<br/><code>404</code></td>
+<td>The requested payin detail does not exist or is not accessible. Verify the payin ID and ensure you have the necessary permissions to access this information.</td>
+</tr>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An unexpected server error occurred. Wait briefly and retry. If the error persists after multiple attempts, contact support. Retrying is safe for this GET operation.</td>
+</tr>
+</tbody></table>
+
 <h2 id='list-pay-in'>List Pay In</h2>
 
 <p>You can use this endpoint to retrieve a list of Pay In requests.</p>
@@ -1285,7 +1350,7 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 </tr>
 </tbody></table>
 
-<h3 id='request-body-parameters-3'>Request Body Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 
 <table><thead>
 <tr>
@@ -1485,6 +1550,24 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 </tr>
 </tbody></table>
 
+<h3 id='error-codes-3'>Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR<br/><code>400</code></td>
+<td>Invalid input parameters. Check the error response for details on which parameters are incorrect. Review the API documentation for proper parameter format and requirements.</td>
+</tr>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An unexpected server error occurred. Wait briefly and retry. If the error persists after multiple attempts, contact support. Retrying is safe for this GET operation.</td>
+</tr>
+</tbody></table>
+
 <h2 id='pay-in-webhook'>Pay In Webhook</h2>
 
 <p>Xenith notifies your system of successful, expired, and failed Pay Ins via webhooks. These notifications are sent as POST requests to the URL provided in the <code>callbackUrl</code> when creating a Pay In. Refer to <a href="#check-webhook-signature">this section</a> to verify the message authenticity.</p>
@@ -1542,7 +1625,7 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 <td>Signature for verifying the request.</td>
 </tr>
 </tbody></table>
-<h3 id='request-body-parameters-4'>Request Body Parameters</h3>
+<h3 id='request-body-parameters-2'>Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1566,8 +1649,6 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 <td>Contains the Pay In object with details and status. (<code>PENDING</code>, <code>SUCCESS</code>, <code>EXPIRED</code>, or <code>FAILED</code>)</td>
 </tr>
 </tbody></table>
-<h3 id='failure-codes'>Failure Codes</h3>
-<p>List of failure codes can be found <a href="https://docs.google.com/spreadsheets/d/1ZUyCCedunqpLK4OWiUkH9N1E__DiW0Zz0REruy-osaQ/edit?usp=sharing">here</a>.</p>
 <h2 id='simulate-pay-in'>Simulate Pay In</h2>
 <p>You can use this endpoint to simulate a transaction status change for testing purposes.</p>
 <h3 id='endpoint-4'>Endpoint</h3>
@@ -1596,7 +1677,7 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature-and-set-headers">here</a> for instructions on how to build a signature.</td>
 </tr>
 </tbody></table>
-<h3 id='request-body-parameters-5'>Request Body Parameters</h3>
+<h3 id='request-body-parameters-3'>Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1661,23 +1742,39 @@ UE9TVAovdjEvd2ViaG9vaz9wYXJhbT12YWx1ZQp7InNjaGVtYVZlcnNpb24iOiIxLjAuMCIsInRpbWVz
 </tr>
 </tbody></table>
 
-<h3 id='response-codes'>Response Codes</h3>
+<aside class="warning">
+Note: These simulations are for testing only and do not affect real funds.
+</aside>
+
+<h3 id='error-codes-4'>Error Codes</h3>
 
 <table><thead>
 <tr>
-<th>Code</th>
+<th>Error Code</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>200</td>
-<td>Simulation successful</td>
+<td>API_VALIDATION_ERROR<br/><code>400</code></td>
+<td>Invalid input parameters. Check the error response for details on which parameters are incorrect. Review the API documentation for proper parameter format and requirements.</td>
+</tr>
+<tr>
+<td>TRANSACTION_STATUS_INVALID<br/><code>400</code></td>
+<td>The provided transaction status is not valid for this operation. Verify the allowed status values in the API documentation.</td>
+</tr>
+<tr>
+<td>TRANSACTION_CATEGORY_INVALID<br/><code>400</code></td>
+<td>The specified transaction category is invalid. Ensure you&#39;re using a supported category as listed in the API documentation.</td>
+</tr>
+<tr>
+<td>INVALID_TRANSACTION_ID<br/><code>400</code></td>
+<td>The transaction ID provided is not valid or does not exist. Check that you&#39;re using the correct transaction ID.</td>
+</tr>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An unexpected server error occurred. Wait briefly and retry. If the error persists after multiple attempts, contact support.</td>
 </tr>
 </tbody></table>
-
-<aside class="warning">
-Note: These simulations are for testing only and do not affect real funds.
-</aside>
 
 <p><h1 id='pay-out'>Pay Out</h1><h2 id='create-pay-out-request'>Create Pay Out Request</h2>
 <p>You can use this endpoint to create a Pay Out request.</p>
@@ -1712,6 +1809,10 @@ Note: These simulations are for testing only and do not affect real funds.
 <td>Xenith-Request-Signature</td>
 <td><code>TC5ZzOHq7XkxPiFpByQcmmpQ2tq4DQjvC8r2wZHwoO4=</code> (Refer <a href="#build-signature-and-set-headers">here</a> for instructions on how to build a signature.</td>
 </tr>
+<tr>
+<td>X-Idempotency-Key</td>
+<td><code>01J8EJACDX13FRGZYVTQVY1S4S</code> (A unique key to prevent duplicate requests. Must be unique across all payout transactions for the merchant. Max 100 characters.)</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -1723,6 +1824,7 @@ Note: These simulations are for testing only and do not affect real funds.
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:00:34.040Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: nckwDl0loxmui6m0XY2rG6k5jEo/AgyoxLAQ2DOoa+0='</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-Idempotency-Key: 01J8EJACDX13FRGZYVTQVY1S4S'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
     "initiatedAmount": 1500,
     "currency": "IDR",
@@ -1918,6 +2020,52 @@ Note: These simulations are for testing only and do not affect real funds.
 </tr>
 </tbody></table>
 
+<h3 id='error-codes'>Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The request failed due to invalid input parameters. Check the error response for details on which fields are invalid and correct them accordingly. Common issues include missing required fields or incorrect data formats.</td>
+</tr>
+<tr>
+<td>DUPLICATE_TRANSACTION_ERROR<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>Idempotency key has been used before. Use a unique idempotency key and try again.</td>
+</tr>
+<tr>
+<td>INVALID_PAYOUT_CHANNEL<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The specified payout channel is not valid or not supported. Ensure you&#39;re using a correct and active payout channel code as listed in our documentation.</td>
+</tr>
+<tr>
+<td>MINIMUM_AMOUNT_PAYOUT_LIMIT<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The transaction amount is below the minimum allowed limit for payouts. Contact our support team to get information about the current minimum amount limits for each payout channel. Adjust your request based on the information provided by support.</td>
+</tr>
+<tr>
+<td>MAXIMUM_AMOUNT_PAYOUT_LIMIT<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The transaction amount exceeds the maximum allowed limit for payouts. Reach out to our support team to inquire about the current maximum amount limits for each payout channel. Modify your request to be within the limits specified by the support team.</td>
+</tr>
+<tr>
+<td>INVALID_ACCOUNT_NAME<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>The provided account name is invalid or does not match our records. Verify the account name and ensure it&#39;s correctly formatted and matches the account associated with the payout.</td>
+</tr>
+<tr>
+<td>MAXIMUM_DAILY_TRANSACTION_VOLUME_EXCEEDED<br/><code>400</code> <span style="color: red;">no retry</span></td>
+<td>You&#39;ve reached the maximum allowed transaction volume for the day. This limit is in place for security reasons. Wait until the next day to process more transactions, or contact support if you need to increase your limit.</td>
+</tr>
+<tr>
+<td>INSUFFICIENT_BALANCE<br/><code>422</code> <span style="color: red;">no retry</span></td>
+<td>There are insufficient funds to complete the payout transaction. Ensure your account has adequate balance before retrying the payout.</td>
+</tr>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An error occurred while connecting to our server. This could be due to temporary server issues. To ensure the transaction wasn&#39;t processed:<br/>1. Use the <a href="#list-pay-out">Get Payout List API</a> to check if the payout was created.<br/>2. If not found, you can safely retry the request.<br/>3. When retrying, use the <code>X-Idempotency-Key</code> header with the same value to prevent duplicate transactions.</td>
+</tr>
+</tbody></table>
+
 <h2 id='get-pay-out-detail'>Get Pay Out Detail</h2>
 
 <p>This endpoint returns the corresponding information of the Pay Out that matches the provided ID.</p>
@@ -1962,7 +2110,7 @@ Note: These simulations are for testing only and do not affect real funds.
 <span class="nt">--header</span> <span class="s1">'Xenith-Api-Key: ak-7e7cd4140e1369dd135ae30d51e0e63a1b16a712f639149ffef2431d6ae3b726'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Timestamp: 2024-05-24T05:16:33.186Z'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Xenith-Request-Signature: PmOnopSgg5ySiozwlC9kCZ8gFo1TNpw6wrb/SziHsEQ='</span>
-</code></pre></div><h3 id='request-body-parameters-2'>Request Body Parameters</h3>
+</code></pre></div><h3 id='path-parameters'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2089,6 +2237,28 @@ Note: These simulations are for testing only and do not affect real funds.
 </tr>
 </tbody></table>
 
+<h3 id='error-codes-2'>Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR<br/><code>400</code></td>
+<td>Invalid input parameters. Check the error response for details on which parameters are incorrect. Review the API documentation for proper parameter format and requirements.</td>
+</tr>
+<tr>
+<td>DATA_NOT_FOUND<br/><code>404</code></td>
+<td>The requested payout detail does not exist or is not accessible. Verify the payout ID and ensure you have the necessary permissions to access this information.</td>
+</tr>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An unexpected server error occurred. Wait briefly and retry. If the error persists after multiple attempts, contact support. Retrying is safe for this GET operation.</td>
+</tr>
+</tbody></table>
+
 <h2 id='list-pay-out'>List Pay Out</h2>
 
 <p>You can use this endpoint to retrieve a list of Pay Out requests.</p>
@@ -2125,7 +2295,7 @@ Note: These simulations are for testing only and do not affect real funds.
 </tr>
 </tbody></table>
 
-<h3 id='request-body-parameters-3'>Request Body Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 
 <table><thead>
 <tr>
@@ -2306,6 +2476,24 @@ Note: These simulations are for testing only and do not affect real funds.
 </tr>
 </tbody></table>
 
+<h3 id='error-codes-3'>Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_VALIDATION_ERROR<br/><code>400</code></td>
+<td>Invalid input parameters. Check the error response for details on which parameters are incorrect. Review the API documentation for proper parameter format and requirements.</td>
+</tr>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An unexpected server error occurred. Wait briefly and retry. If the error persists after multiple attempts, contact support. Retrying is safe for this GET operation.</td>
+</tr>
+</tbody></table>
+
 <h2 id='pay-out-webhook'>Pay Out Webhook</h2>
 
 <p>Xenith notifies your system of successful and failed Pay Out via webhooks. These notifications are sent as POST requests to the URL provided in the <code>callbackUrl</code> when creating a Pay Out. Refer to this section to verify the message authenticity.</p>
@@ -2359,7 +2547,7 @@ Note: These simulations are for testing only and do not affect real funds.
 <td>Signature for verifying the request.</td>
 </tr>
 </tbody></table>
-<h3 id='request-body-parameters-4'>Request Body Parameters</h3>
+<h3 id='request-body-parameters-2'>Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2383,8 +2571,6 @@ Note: These simulations are for testing only and do not affect real funds.
 <td>Contains the Pay In object with details and status. (<code>PENDING</code>, <code>SUCCESS</code>, or <code>FAILED</code>)</td>
 </tr>
 </tbody></table>
-<h3 id='failure-codes'>Failure Codes</h3>
-<p>List of failure codes can be found <a href="https://docs.google.com/spreadsheets/d/1ZUyCCedunqpLK4OWiUkH9N1E__DiW0Zz0REruy-osaQ/edit?usp=sharing">here</a>.</p>
 <h2 id='simulate-pay-out'>Simulate Pay Out</h2>
 <p>To simulate payout transactions, you can create payouts normally using the standard Pay Out API endpoints. However, to control the outcome, use the following account number prefixes:</p>
 <h3 id='successful-transaction'>Successful Transaction</h3>
@@ -2487,6 +2673,20 @@ Note: These simulations are for testing only and do not affect real funds.
 <td>The available balance in the specified currency as a decimal string.</td>
 </tr>
 </tbody></table>
+
+<h3 id='error-codes'>Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>An unexpected server error occurred. Wait briefly and retry. If the error persists after multiple attempts, contact support.</td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
 <p>When integrating with Xenith, you may encounter errors when making API requests. These errors fall into three main categories:</p>
 
@@ -2542,85 +2742,33 @@ Note: These simulations are for testing only and do not affect real funds.
 
 <table><thead>
 <tr>
-<th>Status Code</th>
 <th>Error Code</th>
-<th>Meaning</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>API_VALIDATION_ERROR</td>
-<td>Invalid request errors arise when your request has invalid parameters.</td>
+<td>UNAUTHORIZED_ACCESS<br/><code>401</code></td>
+<td>Access is denied due to invalid credentials. This typically occurs when the provided API key or token is missing or incorrect. Ensure you&#39;re using the correct authentication credentials and that they are properly included in your request headers.</td>
 </tr>
 <tr>
-<td>400</td>
-<td>INVALID_AMOUNT</td>
-<td>The amount entered is not supported.</td>
+<td>FORBIDDEN_ACCESS<br/><code>403</code></td>
+<td>The request was valid, but the server is refusing action due to insufficient permissions. This often happens when your account doesn&#39;t have the necessary rights to perform the requested operation. Check your account permissions and ensure you&#39;re using the correct API key with the required access level.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>INVALID_API_KEY</td>
-<td>The API key provided is incorrect.</td>
+<td>INVALID_SIGNATURE<br/><code>401</code></td>
+<td>The request signature is invalid. This error occurs when the calculated signature doesn&#39;t match the provided signature, often due to incorrect secret keys or improperly formatted request parameters. Double-check your signature calculation process and ensure you&#39;re using the correct secret key.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>INVALID_SIGNATURE</td>
-<td>The request signature is invalid.</td>
+<td>UNKNOWN_IP_ADDRESS<br/><code>401</code></td>
+<td>The IP address used to make the API request is not on the allowed list. This is a security measure to prevent unauthorized access. If you&#39;re receiving this error, you need to add your current IP address to the allowed list in your account settings or contact support for assistance.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>UNKNOWN_IP_ADDRESS</td>
-<td>The IP address is not on the allowed list.</td>
+<td>INVALID_API_KEY<br/><code>401</code></td>
+<td>The API key provided is incorrect, invalid, or has been revoked. Verify that you&#39;re using the correct API key. If the issue persists, you may need to generate a new API key in your account settings or contact support for assistance.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>UNAUTHORIZED_ACCESS</td>
-<td>Access is denied.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>FORBIDDEN</td>
-<td>Insufficient permissions to proceed with the action.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>DATA_NOT_FOUND</td>
-<td>The requested data/item does not exist.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>NOT_ALLOWED</td>
-<td>The endpoint was accessed with an incorrect HTTP method.</td>
-</tr>
-<tr>
-<td>408</td>
-<td>REQUEST_TIMEOUT</td>
-<td>The request is taking longer than expected. Please contact support or try again.</td>
-</tr>
-<tr>
-<td>409</td>
-<td>DATA_DUPLICATE/DATA_ALREADY_EXISTS</td>
-<td>The data is already exist.</td>
-</tr>
-<tr>
-<td>422</td>
-<td>INSUFFICIENT_BALANCE</td>
-<td>Insufficient balance to proceed with the action.</td>
-</tr>
-<tr>
-<td>500</td>
-<td>SERVER_ERROR</td>
-<td>An issue occurred on our server. Please contact support or try again later.</td>
-</tr>
-<tr>
-<td>501</td>
-<td>NOT_IMPLEMENTED</td>
-<td>The service requested is not supported yet.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>SERVICE_UNAVAILABLE</td>
-<td>The service is temporarily offline for maintenance. Please contact support or try again later.</td>
+<td>SERVER_ERROR<br/><code>500</code></td>
+<td>API errors cover any other type of problem (e.g. a temporary problem with Xenith&#39;s servers), and are extremely uncommon</td>
 </tr>
 </tbody></table>
 
